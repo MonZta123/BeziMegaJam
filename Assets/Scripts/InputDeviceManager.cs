@@ -8,6 +8,8 @@ public class InputDeviceManager : MonoBehaviour
 
     [SerializeField]
     private PlayerInputManager playerInputManager;
+    
+    public PlayerInput PlayerInput { get; set; }
 
     public UnityEvent playerJoined;
 
@@ -25,8 +27,10 @@ public class InputDeviceManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        playerJoined?.Invoke();
+        PlayerInput = playerInput;
 
+        playerJoined?.Invoke();
+        
         playerInput.transform.SetParent(transform);
     }
 }
