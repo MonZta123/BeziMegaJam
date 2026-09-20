@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     private static readonly int s_isGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int s_moveSpeed = Animator.StringToHash("MoveSpeed");
+    private static readonly int s_attack = Animator.StringToHash("Attack");
 
     [Header("Components")]
     [SerializeField]
@@ -124,6 +125,7 @@ public class Player : MonoBehaviour
             if (_timeLastAttack + attackCooldown < Time.timeSinceLevelLoad)
             {
                 _timeLastAttack = Time.timeSinceLevelLoad;
+                animator.SetTrigger(s_attack);
                 // Execute Attack
             }
         }
