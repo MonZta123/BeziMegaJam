@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,9 @@ namespace MainMenu
         private GameObject confirmQuitPanel;
 
         [SerializeField]
+        private GameObject splashScreen;
+
+        [SerializeField]
         private GameObject blocker;
 
         [SerializeField]
@@ -37,6 +41,18 @@ namespace MainMenu
 
         private void Awake()
         {
+            InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
+        }
+
+        private void OnDestroy()
+        {
+            InputDeviceManager.Instance.playerJoined.RemoveListener(OnPlayerJoined);
+        }
+
+        private void OnPlayerJoined()
+        {
+            splashScreen.SetActive(false);
+            mainMenuPanel.SetActive(true);
         }
 
         public void StartGameClicked()
@@ -57,7 +73,7 @@ namespace MainMenu
 
             audioMixer.GetFloat("sfx", out var db2);
             sfxVolumeSlider.value = Mathf.Pow(10f, db2 / 20f);
-            
+
             _masterVolume = masterVolumeSlider.value;
             _musicVolume = musicVolumeSlider.value;
             _sfxVolume = sfxVolumeSlider.value;
