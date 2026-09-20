@@ -74,11 +74,9 @@ public class Player : MonoBehaviour
             instance.ContinueGame();
         else
             instance.ShowPauseMenu();
-        
     }
 
     private bool _attack;
-    private bool _interact;
     private bool _jump;
 
     private float _debugMove;
@@ -98,7 +96,8 @@ public class Player : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
-        _interact = true;
+        Debug.Log("INTERACT");
+        _bossFightStart?.Trigger();
     }
 
     public void FixedUpdate()
@@ -164,7 +163,6 @@ public class Player : MonoBehaviour
 
         _attack = false;
         _jump = false;
-        _interact = false;
     }
 
     private bool _jumping;
@@ -194,5 +192,27 @@ public class Player : MonoBehaviour
             groundCheckDistance + 0.05f,
             groundLayers,
             QueryTriggerInteraction.Ignore);
+    }
+
+    private BossFightStart _bossFightStart;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<BossFightStart>(out var bossFightStart))
+        {
+            Debug.Log("INTERACTIVE ENTERED");
+            _bossFightStart = bossFightStart;
+            _bossFightStart.ShowTooltip();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<BossFightStart>(out var bossFightStart))
+        {
+            Debug.Log("INTERACTIVE EXIT");
+            _bossFightStart = null;
+            bossFightStart.HideTooltip();
+        }
     }
 }
