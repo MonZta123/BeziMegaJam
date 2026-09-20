@@ -14,13 +14,28 @@ public class BossFightStart : MonoBehaviour
     [SerializeField]
     private GameObject bossPosition;
 
-    private void OnTriggerEnter(Collider other)
+    public void ShowTooltip()
     {
-        if (other.CompareTag("Player"))
-        {
-            other.transform.position = teleportTarget.position;
-            
-            Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
-        }
+        
     }
+
+    public void HideTooltip()
+    {
+        
+    }
+
+    public void Trigger()
+    {
+        
+    }
+    
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         other.transform.position = teleportTarget.position;
+    //         
+    //         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
+    //     }
+    // }
 }

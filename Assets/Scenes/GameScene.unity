@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 225521995}
   - component: {fileID: 225521994}
   - component: {fileID: 225521997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Teleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4299,6 +4299,7 @@ GameObject:
   - component: {fileID: 1621956565}
   - component: {fileID: 1621956566}
   - component: {fileID: 1621956567}
+  - component: {fileID: 1621956568}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4394,6 +4395,27 @@ MonoBehaviour:
   attackCooldown: 0.5
   moveSpeed: 7.5
   jumpForce: 10
+--- !u!135 &1621956568
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621956563}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 119
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!1 &1632770304
 GameObject:
   m_ObjectHideFlags: 0
