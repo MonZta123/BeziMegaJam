@@ -31,7 +31,7 @@ public class BossFightStart : MonoBehaviour
     public void Trigger(Player callee)
     {
         // Screen fade and stuff in Coroutine
-        callee.transform.position = teleportTarget.position;
+        callee.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
 
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
     }

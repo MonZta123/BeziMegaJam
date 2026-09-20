@@ -7,20 +7,21 @@ namespace UI
     {
         [SerializeField]
         private GameObject tooltipBox;
-        
+
         [SerializeField]
         private TextMeshProUGUI tooltipText;
-        
+
         public void ShowTooltip(string text)
         {
+            tooltipBox.SetActive(true);
             tooltipText.text = text;
         }
-        
+
         public void HideTooltip()
         {
             tooltipBox.SetActive(false);
         }
-        
+
         public static HUD Instance { get; private set; }
 
         private void Awake()

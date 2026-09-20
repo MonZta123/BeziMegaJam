@@ -98,6 +98,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("INTERACT");
         _bossFightStart?.Trigger(this);
+        _bossFightStart = null;
     }
 
     public void FixedUpdate()
