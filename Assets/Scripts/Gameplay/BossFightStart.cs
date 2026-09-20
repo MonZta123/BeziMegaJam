@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 
 public class BossFightStart : MonoBehaviour
@@ -14,28 +15,24 @@ public class BossFightStart : MonoBehaviour
     [SerializeField]
     private GameObject bossPosition;
 
+    [SerializeField]
+    private string tooltipText = "Press E to start the fight!";
+
     public void ShowTooltip()
     {
-        
+        HUD.Instance.ShowTooltip(tooltipText);
     }
 
     public void HideTooltip()
     {
-        
+        HUD.Instance.HideTooltip();
     }
 
-    public void Trigger()
+    public void Trigger(Player callee)
     {
-        
+        // Screen fade and stuff in Coroutine
+        callee.transform.position = teleportTarget.position;
+
+        Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
     }
-    
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         other.transform.position = teleportTarget.position;
-    //         
-    //         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
-    //     }
-    // }
 }

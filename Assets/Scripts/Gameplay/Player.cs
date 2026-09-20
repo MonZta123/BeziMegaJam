@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext ctx)
     {
         Debug.Log("INTERACT");
-        _bossFightStart?.Trigger();
+        _bossFightStart?.Trigger(this);
     }
 
     public void FixedUpdate()
