@@ -6,7 +6,7 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != this)
+        if (Instance && Instance != this)
         {
             Destroy(gameObject);
             return;
