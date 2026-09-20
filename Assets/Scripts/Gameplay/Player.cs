@@ -94,6 +94,13 @@ public class Player : MonoBehaviour
         _jump = true;
     }
 
+    private bool _controlsLocked; 
+    
+    public void LockControls(bool locked)
+    {
+       _controlsLocked = locked; 
+    }
+    
     private void OnInteract(InputAction.CallbackContext ctx)
     {
         Debug.Log("INTERACT");

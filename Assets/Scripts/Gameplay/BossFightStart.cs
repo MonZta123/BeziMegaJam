@@ -1,3 +1,4 @@
+using System.Collections;
 using UI;
 using UnityEngine;
 
@@ -30,9 +31,17 @@ public class BossFightStart : MonoBehaviour
 
     public void Trigger(Player callee)
     {
-        // Screen fade and stuff in Coroutine
-        callee.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
+        callee.LockControls(true);
+        HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee)));
+    }
 
+    private IEnumerator DoTeleport(Player callee)
+    {
+        player.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
+
+        yield return new WaitForSeconds(0.5f);
+        callee.LockControls(true);
+        HUD.Instance.FadeIn(0.5f);
     }
 }
