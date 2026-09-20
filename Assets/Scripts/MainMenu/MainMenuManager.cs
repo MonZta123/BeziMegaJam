@@ -39,18 +39,22 @@ namespace MainMenu
         [SerializeField]
         private AudioMixer audioMixer;
 
-        private void Awake()
+        private void Start()
         {
-            InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
-        }
-
-        private void OnDestroy()
-        {
-            InputDeviceManager.Instance.playerJoined.RemoveListener(OnPlayerJoined);
+            if (!InputDeviceManager.Instance.PlayerInput)
+            {
+                splashScreen.SetActive(true);
+                InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
+            }
+            else
+            {
+                mainMenuPanel.SetActive(true);
+            }
         }
 
         private void OnPlayerJoined()
         {
+            InputDeviceManager.Instance.playerJoined.RemoveListener(OnPlayerJoined);
             splashScreen.SetActive(false);
             mainMenuPanel.SetActive(true);
         }

@@ -53,16 +53,27 @@ public class Player : MonoBehaviour
         _playerInput.actions["attack"].performed += OnAttack;
         _playerInput.actions["interact"].performed += OnInteract;
         _playerInput.actions["jump"].performed += OnJumping;
+        _playerInput.actions["pause"].performed += OnPause;
     }
 
     private void OnDestroy()
     {
-        if (_playerInput)
-        {
-            _playerInput.actions["attack"].performed -= OnAttack;
-            _playerInput.actions["interact"].performed -= OnInteract;
-            _playerInput.actions["jump"].performed -= OnJumping;
-        }
+        _playerInput.actions["attack"].performed -= OnAttack;
+        _playerInput.actions["interact"].performed -= OnInteract;
+        _playerInput.actions["jump"].performed -= OnJumping;
+        _playerInput.actions["pause"].performed -= OnPause;
+    }
+
+    private void OnPause(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("ESC HIT");
+        var instance = PauseMenuManager.Instance;
+
+        if (instance.PauseIsActive)
+            instance.ContinueGame();
+        else
+            instance.ShowPauseMenu();
+        
     }
 
     private bool _attack;
@@ -72,7 +83,8 @@ public class Player : MonoBehaviour
     private float _debugMove;
 
     private float _timeLastAttack;
-    
+    private PauseMenuManager _pauseMenuManager;
+
     private void OnAttack(InputAction.CallbackContext ctx)
     {
         _attack = true;
@@ -93,14 +105,19 @@ public class Player : MonoBehaviour
         CheckIsGrounded();
     }
 
+    private void Start()
+    {
+        _pauseMenuManager = PauseMenuManager.Instance;
+        CheckIsGrounded();
+        animator.SetBool(s_isGrounded, IsGrounded);
+    }
+
     public void Update()
     {
-        if (!_playerInput)
+        if (!_playerInput || _pauseMenuManager.PauseIsActive)
             return;
 
         var move = Vector2.ClampMagnitude(_playerInput.actions["Move"].ReadValue<Vector2>(), 1);
-
-        _debugMove = move.magnitude;
 
         if (_attack)
         {
@@ -135,17 +152,17 @@ public class Player : MonoBehaviour
 
         rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
 
+        if (animator)
+        {
+            animator.SetBool(s_isGrounded, IsGrounded);
+            animator.SetFloat(s_moveSpeed, move.magnitude);
+        }
+
+        _debugMove = move.magnitude;
+
         _attack = false;
         _jump = false;
         _interact = false;
-
-        if (animator)
-        {
-            if (IsGrounded)
-                animator.SetFloat(s_moveSpeed, move.magnitude);
-
-            animator.SetBool(s_isGrounded, IsGrounded);
-        }
     }
 
     private bool _jumping;
