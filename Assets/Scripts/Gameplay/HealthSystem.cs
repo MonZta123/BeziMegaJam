@@ -17,16 +17,24 @@ public class HealthSystem : MonoBehaviour
     [SerializeField]
     private int maxStartHealth = 5;
 
+    [Header("Player")]
     [SerializeField]
     private GameObject backgroundHealthContainer;
     
     [SerializeField]
     private GameObject fullHealthContainer;
     
+    [Header("Boss")]
+    [SerializeField]
+    private GameObject backgroundBossContainer;
+    
+    [SerializeField]
+    private GameObject fullBossContainer;
+    
     private int _maxHealth;
     private int _currentHealth;
     
-    public void SetMaxHealth(int value)
+    public void SetMaxHealthPlayer(int value)
     {
         _maxHealth = value;
 
@@ -41,11 +49,11 @@ public class HealthSystem : MonoBehaviour
             Destroy(n.gameObject);
         });
         
-        BuildBackground();
-        BuildHealth();
+        BuildBackgroundPlayer();
+        BuildHealthPlayer();
     }
 
-    private void BuildBackground()
+    private void BuildBackgroundPlayer()
     {
         for (var i = 0; i < _maxHealth; i++)
         {
@@ -54,7 +62,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    private void BuildHealth()
+    private void BuildHealthPlayer()
     {
         _healthObjects.Clear();
         for (var i = 0; i < _currentHealth; i++)
@@ -64,7 +72,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    public void SetCurrentHealth(int value)
+    public void SetCurrentHealthPlayer(int value)
     {
         _currentHealth = value;
         
@@ -76,7 +84,7 @@ public class HealthSystem : MonoBehaviour
         });
         
         _healthObjects.Clear();
-        BuildHealth();
+        BuildHealthPlayer();
     }
 
     private readonly Stack<Image> _healthObjects = new();
@@ -86,13 +94,13 @@ public class HealthSystem : MonoBehaviour
         _currentHealth = Math.Min(startHealth, maxStartHealth);
         _maxHealth = maxStartHealth;
 
-        BuildBackground();
-        BuildHealth();
+        BuildBackgroundPlayer();
+        BuildHealthPlayer();
 
         Instance = this;
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamagePlayer(int damage)
     {
         _currentHealth -= damage;
         _currentHealth = Math.Max(_currentHealth, 0);
@@ -101,10 +109,64 @@ public class HealthSystem : MonoBehaviour
         {
             Destroy(obj.gameObject);
         }
+    }
 
-        if (_currentHealth <= 0)
+    private int _maxBossHealth;
+    private int _currentBossHealth;
+    private readonly Stack<Image> _healthObjectsBoss = new();
+    
+    public void ShowBossHealth(int health)
+    {
+        _maxBossHealth = health;
+        _currentBossHealth = health;
+        
+        BuildBackgroundBoss();
+        BuildHealthBoss();
+    }
+
+    private void BuildBackgroundBoss()
+    {
+        for (var i = 0; i < _maxBossHealth; i++)
         {
-            // get cooked
+            var image = Instantiate(healthImage, backgroundBossContainer.transform);
+            image.color = Color.black;
+        }
+    }
+
+    private void BuildHealthBoss()
+    {
+        _healthObjectsBoss.Clear();
+        for (var i = 0; i < _currentBossHealth; i++)
+        {
+            var obj = Instantiate(healthImage, fullBossContainer.transform);
+            _healthObjectsBoss.Push(obj);
+        }
+    }
+    
+    public void HideBossHealth()
+    {
+        var transforms = backgroundBossContainer.GetComponentsInChildren<Transform>().Skip(1).ToArray();
+        for (var i = 0; i < transforms.Length; i++)
+        {
+            Destroy(transforms[i].gameObject);
+        }
+
+        _healthObjectsBoss.ToList().ForEach(n =>
+        {
+            Destroy(n.gameObject);
+        });
+        
+        _healthObjectsBoss.Clear();
+    }
+    
+    public void TakeDamageBoss(int damage)
+    {
+        _currentBossHealth -= damage;
+        _currentBossHealth = Math.Max(_currentBossHealth, 0);
+
+        if (_healthObjectsBoss.TryPop(out var obj))
+        {
+            Destroy(obj.gameObject);
         }
     }
 }

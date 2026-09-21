@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 74673905527093}
   - component: {fileID: 8094255149528042060}
   - component: {fileID: 6801505444244112018}
+  - component: {fileID: 437236916011312578}
   m_Layer: 0
   m_Name: TestBoss1
   m_TagString: Untagged
@@ -114,3 +115,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &437236916011312578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531835196966881574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ed2d285ed94448b7321e25b2dc273b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossBehaviours.TestBossBehaviour
+  health: 10
+  meshRenderer: {fileID: 8094255149528042060}
+  flashMaterial: {fileID: 2100000, guid: ec60e88fd8fdc0d4caae75e367922560, type: 2}
