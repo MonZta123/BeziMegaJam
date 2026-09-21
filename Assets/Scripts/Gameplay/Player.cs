@@ -76,9 +76,10 @@ public class Player : MonoBehaviour
         var instance = PauseMenuManager.Instance;
 
         if (instance.PauseIsActive)
-           { instance.ContinueGame();
+        {
+            instance.ContinueGame();
             Debug.Log("Opening");
-           }
+        }
         else
             instance.ShowPauseMenu();
     }
@@ -101,13 +102,13 @@ public class Player : MonoBehaviour
         _jump = true;
     }
 
-    private bool _controlsLocked; 
-    
+    private bool _controlsLocked;
+
     public void LockControls(bool locked)
     {
-       _controlsLocked = locked; 
+        _controlsLocked = locked;
     }
-    
+
     private void OnInteract(InputAction.CallbackContext ctx)
     {
         Debug.Log("INTERACT");
@@ -188,11 +189,6 @@ public class Player : MonoBehaviour
         Gizmos.color = IsGrounded ? Color.green : Color.red;
         var origin = transform.position + Vector3.up * (groundCheckRadius + 0.05f);
         Gizmos.DrawWireSphere(origin + Vector3.down * (groundCheckDistance + 0.05f), groundCheckRadius);
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 100, 20), $"Move: {_debugMove}");
     }
 
     public void CallFootstepFeedback()
