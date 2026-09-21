@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
@@ -101,6 +100,7 @@ public class Player : MonoBehaviour
 
         if (_health <= 0)
         {
+            EndScreenManager.Instance.ShowLoseScreen();
             // get cooked
         }
     }
@@ -146,7 +146,6 @@ public class Player : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
-        Debug.Log("INTERACT");
         _bossFightStart?.Trigger(this);
         _bossFightStart = null;
     }
@@ -192,12 +191,9 @@ public class Player : MonoBehaviour
                     {
                         if (hitInfo.transform.gameObject.TryGetComponent<BossMonoBehaviour>(out var behaviour))
                         {
-                            Debug.Log("HIT");
                             behaviour.TakeDamage(1);
                         }
-                    }
-
-                    // Execute Attack
+                    }        
                 }
             }
 
@@ -224,14 +220,14 @@ public class Player : MonoBehaviour
                 transform.LookAt(transform.position + new Vector3(move.x, 0, move.y), Vector3.up);
 
             rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
+            
+            if (animator)
+            {
+                animator.SetBool(s_isGrounded, IsGrounded);
+                animator.SetFloat(s_moveSpeed, move.magnitude);
+            }
         }
-
-        if (animator)
-        {
-            animator.SetBool(s_isGrounded, IsGrounded);
-            animator.SetFloat(s_moveSpeed, move.magnitude);
-        }
-
+        
         _debugMove = move.magnitude;
 
         _attack = false;
