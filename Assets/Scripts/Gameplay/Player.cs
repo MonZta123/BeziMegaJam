@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 //using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,20 @@ public class Player : MonoBehaviour
     private static readonly int s_isGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int s_moveSpeed = Animator.StringToHash("MoveSpeed");
     private static readonly int s_attack = Animator.StringToHash("Attack");
+
+    [SerializeField]
+    private LayerMask attackMask;
+
+    public static Player Instance { get; private set; }
+
+    private Vector3 _startPosition;
+
+    private void Awake()
+    {
+        Instance = this;
+
+        _startPosition = transform.position;
+    }
 
     [Header("Components")]
     [SerializeField]
@@ -83,7 +98,7 @@ public class Player : MonoBehaviour
     {
         _health -= value;
         _health = Math.Max(_health, 0);
-        
+
         if (_health <= 0)
         {
             // get cooked
@@ -149,6 +164,13 @@ public class Player : MonoBehaviour
         SetHealth(5);
     }
 
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position + Vector3.up * 1.5f, transform.forward * 1.5f, Color.red);
+    }
+#endif
+
     public void Update()
     {
         if (!_playerInput || _pauseMenuManager.PauseIsActive)
@@ -156,39 +178,53 @@ public class Player : MonoBehaviour
 
         var move = Vector2.ClampMagnitude(_playerInput.actions["Move"].ReadValue<Vector2>(), 1);
 
-        if (_attack)
+        if (!_controlsLocked)
         {
-            if (_timeLastAttack + attackCooldown < Time.timeSinceLevelLoad)
+            if (_attack)
             {
-                _timeLastAttack = Time.timeSinceLevelLoad;
-                animator.SetTrigger(s_attack);
-                // Execute Attack
+                if (_timeLastAttack + attackCooldown < Time.timeSinceLevelLoad)
+                {
+                    _timeLastAttack = Time.timeSinceLevelLoad;
+                    animator.SetTrigger(s_attack);
+                    if (Physics.Raycast(transform.position + Vector3.up * 1.5f, transform.forward, out var hitInfo,
+                            1.5f,
+                            attackMask))
+                    {
+                        if (hitInfo.transform.gameObject.TryGetComponent<BossMonoBehaviour>(out var behaviour))
+                        {
+                            Debug.Log("HIT");
+                            behaviour.TakeDamage(1);
+                        }
+                    }
+
+                    // Execute Attack
+                }
             }
+
+            if (_jump)
+            {
+                if (IsGrounded && _hasLostGround && !_jumping)
+                {
+                    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    _jumping = true;
+                }
+
+                if (!IsGrounded && !_hasLostGround)
+                {
+                    _hasLostGround = true;
+                }
+
+                if (IsGrounded && _jumping && _hasLostGround)
+                {
+                    _jumping = false;
+                }
+            }
+
+            if (move != Vector2.zero)
+                transform.LookAt(transform.position + new Vector3(move.x, 0, move.y), Vector3.up);
+
+            rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
         }
-
-        if (_jump)
-        {
-            if (IsGrounded && _hasLostGround && !_jumping)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                _jumping = true;
-            }
-
-            if (!IsGrounded && !_hasLostGround)
-            {
-                _hasLostGround = true;
-            }
-
-            if (IsGrounded && _jumping && _hasLostGround)
-            {
-                _jumping = false;
-            }
-        }
-
-        if (move != Vector2.zero)
-            transform.LookAt(transform.position + new Vector3(move.x, 0, move.y), Vector3.up);
-
-        rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
 
         if (animator)
         {
@@ -251,5 +287,25 @@ public class Player : MonoBehaviour
             _bossFightStart = null;
             bossFightStart.HideTooltip();
         }
+    }
+
+    public void GoBackToKitchen(GameObject callee)
+    {
+        LockControls(true);
+        HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee, _startPosition)));
+    }
+
+    private IEnumerator DoTeleport(GameObject callee, Vector3 position)
+    {
+        rb.MovePosition(position);
+
+        Destroy(callee);
+        
+        yield return new WaitForSeconds(0.5f);
+
+        LockControls(false);
+        HUD.Instance.FadeIn(0.5f);
+
+        yield return new WaitForSeconds(0.5f);
     }
 }

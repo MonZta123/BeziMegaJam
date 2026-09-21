@@ -145,11 +145,18 @@ public class HealthSystem : MonoBehaviour
     
     public void HideBossHealth()
     {
-        _healthObjects.ToList().ForEach(n =>
+        var transforms = backgroundBossContainer.GetComponentsInChildren<Transform>().Skip(1).ToArray();
+        for (var i = 0; i < transforms.Length; i++)
+        {
+            Destroy(transforms[i].gameObject);
+        }
+
+        _healthObjectsBoss.ToList().ForEach(n =>
         {
             Destroy(n.gameObject);
         });
-        _healthObjects.Clear();
+        
+        _healthObjectsBoss.Clear();
     }
     
     public void TakeDamageBoss(int damage)

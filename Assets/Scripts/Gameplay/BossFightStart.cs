@@ -5,9 +5,6 @@ using MoreMountains.Feedbacks;
 
 public class BossFightStart : MonoBehaviour
 {
-    
-    private Player player;
-
     [SerializeField]
     private Transform teleportTarget;
 
@@ -23,10 +20,8 @@ public class BossFightStart : MonoBehaviour
     [SerializeField]
     public MMF_Player bouncingFeedback;
 
-
     public void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         bouncingFeedback.PlayFeedbacks();
     }
 
@@ -48,14 +43,12 @@ public class BossFightStart : MonoBehaviour
 
     private IEnumerator DoTeleport(Player callee)
     {
-        player.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
+        callee.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
-        
-        HealthSystem.Instance.ShowBossHealth(10);
-        
-        callee.LockControls(true);
+
+        callee.LockControls(false);
         HUD.Instance.FadeIn(0.5f);
     }
 }

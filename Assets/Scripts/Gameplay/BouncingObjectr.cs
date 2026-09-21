@@ -6,7 +6,7 @@ using System.Security;
 public class BouncingObjectr : MonoBehaviour
 {
     [SerializeField]
-    BossFightStart bfs;
+    private BossFightStart bfs;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
