@@ -46,6 +46,9 @@ public class BossFightStart : MonoBehaviour
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
+        
+        HealthSystem.Instance.ShowBossHealth(10);
+        
         callee.LockControls(true);
         HUD.Instance.FadeIn(0.5f);
     }

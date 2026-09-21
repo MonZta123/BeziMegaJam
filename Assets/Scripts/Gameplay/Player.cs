@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [SelectionBase]
@@ -70,6 +71,25 @@ public class Player : MonoBehaviour
         _playerInput.actions["pause"].performed -= OnPause;
     }
 
+    private int _health;
+
+    public void SetHealth(int value)
+    {
+        _health = value;
+        HealthSystem.Instance.SetCurrentHealthPlayer(value);
+    }
+
+    public void TakeDamage(int value)
+    {
+        _health -= value;
+        _health = Math.Max(_health, 0);
+        
+        if (_health <= 0)
+        {
+            // get cooked
+        }
+    }
+
     private void OnPause(InputAction.CallbackContext ctx)
     {
         Debug.Log("ESC HIT");
@@ -126,6 +146,7 @@ public class Player : MonoBehaviour
         _pauseMenuManager = PauseMenuManager.Instance;
         CheckIsGrounded();
         animator.SetBool(s_isGrounded, IsGrounded);
+        SetHealth(5);
     }
 
     public void Update()
