@@ -1,8 +1,10 @@
+using System.Diagnostics;
 using UnityEngine;
+
 
 public class GameSceneBootstrapper : MonoBehaviour
 {
-    [SerializeField]
+    
     private Player player;
 
     [SerializeField]
@@ -11,7 +13,7 @@ public class GameSceneBootstrapper : MonoBehaviour
     private void Start()
     {
         var instance = InputDeviceManager.Instance;
-        
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (InputDeviceManager.Instance.PlayerInput)
         {
             player.SetPlayerInput(instance.PlayerInput);
@@ -31,6 +33,7 @@ public class GameSceneBootstrapper : MonoBehaviour
     
     private void OnPlayerJoined()
     {
+        UnityEngine.Debug.Log(player);
         Time.timeScale = 1;
         splashScreen.SetActive(false);
         player.SetPlayerInput(InputDeviceManager.Instance.PlayerInput);

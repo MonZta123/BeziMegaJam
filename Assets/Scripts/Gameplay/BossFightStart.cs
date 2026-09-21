@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossFightStart : MonoBehaviour
 {
-    [SerializeField]
+    
     private Player player;
 
     [SerializeField]
@@ -18,6 +18,11 @@ public class BossFightStart : MonoBehaviour
 
     [SerializeField]
     private string tooltipText = "Press E to start the fight!";
+
+    public void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
 
     public void ShowTooltip()
     {

@@ -1,6 +1,8 @@
 using System;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
 
 [RequireComponent(typeof(Rigidbody))]
 [SelectionBase]
@@ -37,6 +39,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpForce = 10.0f;
 
+    [SerializeField]
+    public MMF_Player FootstepFeedback;
+
     public bool IsGrounded { get; private set; } = true;
 
     private PlayerInput _playerInput;
@@ -71,7 +76,9 @@ public class Player : MonoBehaviour
         var instance = PauseMenuManager.Instance;
 
         if (instance.PauseIsActive)
-            instance.ContinueGame();
+           { instance.ContinueGame();
+            Debug.Log("Opening");
+           }
         else
             instance.ShowPauseMenu();
     }
@@ -186,6 +193,11 @@ public class Player : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 100, 20), $"Move: {_debugMove}");
+    }
+
+    public void CallFootstepFeedback()
+    {
+        FootstepFeedback.PlayFeedbacks();
     }
 
     private void CheckIsGrounded()
