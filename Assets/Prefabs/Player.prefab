@@ -291,6 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420400b6ee52f8346bfb150f580ec9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 0
   rb: {fileID: 355789509946330818}
   animator: {fileID: 7350937320310593217}
   groundCheckRadius: 0.5
@@ -301,6 +304,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   moveSpeed: 7.5
   jumpForce: 10
+  FootstepFeedback: {fileID: 0}
 --- !u!135 &3643096347093038878
 SphereCollider:
   m_ObjectHideFlags: 0
