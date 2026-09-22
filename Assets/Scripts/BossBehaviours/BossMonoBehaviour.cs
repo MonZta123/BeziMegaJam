@@ -27,6 +27,8 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     private void Awake()
     {
         HealthSystem.Instance.ShowBossHealth(health);
+        
+        Debug.Log("Awake Wird gecalled");
 
         _materials = meshRenderer.sharedMaterials;
         _flashMaterials = new Material[_materials.Length];

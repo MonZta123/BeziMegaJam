@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8094255149528042060}
   - component: {fileID: 6801505444244112018}
   - component: {fileID: 437236916011312578}
-  - component: {fileID: 3045088065712388552}
   m_Layer: 0
   m_Name: TestBoss1
   m_TagString: Untagged
@@ -131,15 +130,3 @@ MonoBehaviour:
   health: 10
   meshRenderer: {fileID: 8094255149528042060}
   flashMaterial: {fileID: 2100000, guid: ec60e88fd8fdc0d4caae75e367922560, type: 2}
---- !u!114 &3045088065712388552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531835196966881574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cb829d91448e3446950dbc2f1147b0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossAttack

@@ -136,6 +136,7 @@ public class HealthSystem : MonoBehaviour
     private void BuildHealthBoss()
     {
         _healthObjectsBoss.Clear();
+        Debug.Log("Wird gecalled");
         for (var i = 0; i < _currentBossHealth; i++)
         {
             var obj = Instantiate(healthImage, fullBossContainer.transform);

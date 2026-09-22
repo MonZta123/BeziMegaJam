@@ -80,11 +80,11 @@ public class BossFightStart : MonoBehaviour
 
     private IEnumerator DoTeleport(Player callee)
     {
-        Player.Instance.MoveTo(teleportTarget.position);
+        callee.MoveTo(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
-        callee.LockControls(true);
+        callee.LockControls(false);
         HUD.Instance.FadeIn(0.5f);
     }
 }

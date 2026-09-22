@@ -91,6 +91,9 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!_playerInput)
+            return;
+        
         _playerInput.actions["attack"].performed -= OnAttack;
         _playerInput.actions["interact"].performed -= OnInteract;
         _playerInput.actions["jump"].performed -= OnJumping;

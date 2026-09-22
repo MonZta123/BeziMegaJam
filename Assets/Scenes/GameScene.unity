@@ -2838,11 +2838,6 @@ Transform:
   - {fileID: 35076567}
   m_Father: {fileID: 596154766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &370870501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2531835196966881574, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-  m_PrefabInstance: {fileID: 1450883675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &399489983
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,7 +7721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1100201261
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9418,7 +9413,7 @@ PrefabInstance:
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: bossPosition
       value: 
-      objectReference: {fileID: 370870501}
+      objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
@@ -10231,6 +10226,37 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1447548612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447548613}
+  m_Layer: 0
+  m_Name: BossStartPositionTopBun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1447548613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447548612}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.616, y: 2.017, z: 4.541}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448638981
 GameObject:
   m_ObjectHideFlags: 0
@@ -10343,67 +10369,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448638981}
   m_Mesh: {fileID: 1385990396969797544, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
---- !u!1001 &1450883675
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2531835196966881574, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_Name
-      value: PattyBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 49.442223
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.934261
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.619981
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484398621959061690, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094255149528042060, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fd27a7f6311e7f408d94f176153a4ef, type: 3}
 --- !u!1 &1500612168
 GameObject:
   m_ObjectHideFlags: 0
@@ -10899,12 +10864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f916bcc03bf9114491068fa655aee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChalkBoardTextManager
-  ComplaintMessages:
-  - Im not happy
-  - My kids left me
-  - You guys dont have any mustard
-  - You know I just wanted salad
-  displayText: {fileID: 287303255}
+  ComplaintMessages: []
+  displayText: {fileID: 0}
 --- !u!1 &1632770304
 GameObject:
   m_ObjectHideFlags: 0
@@ -13939,7 +13900,7 @@ PrefabInstance:
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: bossPosition
       value: 
-      objectReference: {fileID: 370870501}
+      objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
@@ -14210,7 +14171,7 @@ PrefabInstance:
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: bossPosition
       value: 
-      objectReference: {fileID: 370870501}
+      objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
@@ -14497,4 +14458,4 @@ SceneRoots:
   - {fileID: 4156455075825935940}
   - {fileID: 893386699}
   - {fileID: 1936304338}
-  - {fileID: 1450883675}
+  - {fileID: 1447548613}
