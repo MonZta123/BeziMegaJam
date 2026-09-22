@@ -2838,6 +2838,11 @@ Transform:
   - {fileID: 35076567}
   m_Father: {fileID: 596154766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &392220577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3304345655493743071, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+  m_PrefabInstance: {fileID: 4156455075825935940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &399489983
 GameObject:
   m_ObjectHideFlags: 0
@@ -6673,6 +6678,7 @@ GameObject:
   - component: {fileID: 934387576}
   - component: {fileID: 934387575}
   - component: {fileID: 934387574}
+  - component: {fileID: 934387577}
   m_Layer: 0
   m_Name: Wall_Bar (3)
   m_TagString: Untagged
@@ -6773,6 +6779,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934387572}
   m_Mesh: {fileID: 1219405387347141858, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
+--- !u!114 &934387577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934387572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2647b16f961a4d345a8fefc6746804b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Delivery
 --- !u!4 &962364580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2963892465686543081, guid: 6bd68dac681b8584dadb7caccdb3b4ab, type: 3}
@@ -7704,6 +7722,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1098954521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8041938826496116491, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+  m_PrefabInstance: {fileID: 4156455075825935940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1100201260
 GameObject:
   m_ObjectHideFlags: 0
@@ -9580,6 +9603,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296297361}
   m_Mesh: {fileID: 8733429697405204941, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
+--- !u!1 &1327288019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6879487175068850724, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+  m_PrefabInstance: {fileID: 4156455075825935940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1337760720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36e794e66ae470944af0305f6c75ac72, type: 3}
@@ -9699,6 +9727,7 @@ GameObject:
   - component: {fileID: 1388431824}
   - component: {fileID: 1388431823}
   - component: {fileID: 1388431822}
+  - component: {fileID: 1388431825}
   m_Layer: 0
   m_Name: Wall_Bar (2)
   m_TagString: Untagged
@@ -9799,6 +9828,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388431820}
   m_Mesh: {fileID: 1219405387347141858, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
+--- !u!114 &1388431825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388431820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2647b16f961a4d345a8fefc6746804b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Delivery
 --- !u!1 &1391822129
 GameObject:
   m_ObjectHideFlags: 0
@@ -14213,6 +14254,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.data[1].part
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.data[2].part
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.data[0].gameObject
+      value: 
+      objectReference: {fileID: 1327288019}
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.data[1].gameObject
+      value: 
+      objectReference: {fileID: 1098954521}
+    - target: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
+      propertyPath: parts.Array.data[2].gameObject
+      value: 
+      objectReference: {fileID: 392220577}
     - target: {fileID: 6704787505789740565, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.17

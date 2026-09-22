@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Gameplay.ReferenceScripts;
 using UI;
 using UnityEngine;
 
@@ -16,10 +17,15 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     private Material[] _materials;
     private Material[] _flashMaterials;
+    
+    [SerializeField]
+    private BurgerPart reward;
 
     private void OnDestroy()
     {
         HealthSystem.Instance.HideBossHealth();
+        
+        Burger.CurrentBurger.AddBurgerPart(reward);
     }
 
     public abstract void OnDeath();

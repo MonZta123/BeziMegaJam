@@ -310,7 +310,7 @@ public class Player : MonoBehaviour
             _bossFightStart.ShowTooltip();
         }
         
-        if (other.TryGetComponent<Burger>(out var burger))
+        if (other.TryGetComponent<Burger>(out var burger) && burger.HasAnyParts())
         {
             _burgerInView = burger;
             _burgerInView.ShowTooltip();
@@ -334,7 +334,16 @@ public class Player : MonoBehaviour
             _burgerInView = null;
             burger.HideTooltip();
         }
+
+        if (other.TryGetComponent<Delivery>(out var delivery))
+        {
+            Debug.Log("INTERACTIVE EXIT");
+            _deliveryInView = delivery;
+            delivery.HideTooltip();
+        }
     }
+    
+    private Delivery _deliveryInView;
 
     public void GoBackToKitchen(GameObject callee)
     {
