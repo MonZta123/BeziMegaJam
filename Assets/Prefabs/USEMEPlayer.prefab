@@ -796,6 +796,7 @@ MonoBehaviour:
   jumpForce: 10
   carryingAttachmentPoint: {fileID: 5640559349797667679}
   rightHandRig: {fileID: 5791254818018029880}
+  trigger: {fileID: 3643096347093038878}
 --- !u!135 &3643096347093038878
 SphereCollider:
   m_ObjectHideFlags: 0
