@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -28,6 +29,28 @@ namespace Gameplay.ReferenceScripts
         private List<BurgerPartMatch> parts;
 
         public static Burger CurrentBurger { get; private set; }
+        
+        public (Vector3, Quaternion) GetOriginalPosition() => (_originalPosition, _originalRotation);
+
+        public bool GetIsFinished()
+        {
+            var ingredients = OrderSystem.Instance.GetIngredients();
+
+            var activeGameObjects = activeParts.ToList();
+
+            var isFinished = ingredients.All(n => activeGameObjects.Contains(n));
+            
+            return isFinished;
+        }
+
+        public bool GetHasMistakes()
+        {
+            var ingredients = OrderSystem.Instance.GetIngredients();
+
+            var activeGameObjects = activeParts.ToList();
+
+            return activeGameObjects.Any(m => !ingredients.Contains(m));
+        }        
         
         public void Awake()
         {
