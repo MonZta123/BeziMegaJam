@@ -1,6 +1,7 @@
 using System.Collections;
 using UI;
 using UnityEngine;
+using Unity.Cinemachine;
 using MoreMountains.Feedbacks;
 
 
@@ -8,6 +9,7 @@ public class BossFightStart : MonoBehaviour
 {
     
     private Player player;
+    private CinemachineBrain brain;
 
     [SerializeField]
     private Transform teleportTarget;
@@ -42,6 +44,8 @@ public class BossFightStart : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         ingreident = GetComponentInChildren<IngredientRef>().gameObject;
         startPos = ingreident.transform.position;
+        // Get the active virtual camera via the Cinemachine Brain
+
     }
 
     public void Update()
