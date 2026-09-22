@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using Gameplay.ReferenceScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using MoreMountains.Feedbacks;
 using UI;
+using UnityEngine.Animations.Rigging;
 
 [RequireComponent(typeof(Rigidbody))]
 [SelectionBase]
@@ -55,9 +56,20 @@ public class Player : MonoBehaviour
     private float jumpForce = 10.0f;
 
     [SerializeField]
-    public MMF_Player FootstepFeedback;
+    public Transform carryingAttachmentPoint;
+
+    [SerializeField]
+    private Rig rightHandRig;
+
+    [SerializeField]
+    private SphereCollider trigger;
 
     public bool IsGrounded { get; private set; } = true;
+
+    public Transform GetAttachmentPoint()
+    {
+        return carryingAttachmentPoint;
+    }
 
     private PlayerInput _playerInput;
 
@@ -144,8 +156,31 @@ public class Player : MonoBehaviour
         _controlsLocked = locked;
     }
 
+    private Burger _carryingBurger;
+    
     private void OnInteract(InputAction.CallbackContext ctx)
     {
+        if (_carryingBurger)
+        {
+            _carryingBurger.Drop();
+            _carryingBurger = null;
+            rightHandRig.weight = 0.0f;
+
+            trigger.enabled = false;
+            trigger.enabled = true;
+            return;
+        }
+        
+        if (_burgerInView)
+        {
+            _carryingBurger = _burgerInView;
+            _burgerInView?.Carry(this);
+            rightHandRig.weight = 1.0f;
+            _burgerInView = null;
+            _bossFightStart = null;
+            return;
+        }
+        
         _bossFightStart?.Trigger(this);
         _bossFightStart = null;
     }
@@ -179,7 +214,7 @@ public class Player : MonoBehaviour
 
         if (!_controlsLocked)
         {
-            if (_attack)
+            if (_attack && !_carryingBurger)
             {
                 if (_timeLastAttack + attackCooldown < Time.timeSinceLevelLoad)
                 {
@@ -244,11 +279,6 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(origin + Vector3.down * (groundCheckDistance + 0.05f), groundCheckRadius);
     }
 
-    public void CallFootstepFeedback()
-    {
-        FootstepFeedback.PlayFeedbacks();
-    }
-
     private void CheckIsGrounded()
     {
         var origin = transform.position + Vector3.up * (groundCheckRadius + 0.05f);
@@ -267,13 +297,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_carryingBurger)
+            return;
+        
         if (other.TryGetComponent<BossFightStart>(out var bossFightStart))
         {
             Debug.Log("INTERACTIVE ENTERED");
             _bossFightStart = bossFightStart;
             _bossFightStart.ShowTooltip();
         }
+        
+        if (other.TryGetComponent<Burger>(out var burger))
+        {
+            _burgerInView = burger;
+            _burgerInView.ShowTooltip();
+        }
     }
+
+    private Burger _burgerInView;
 
     private void OnTriggerExit(Collider other)
     {
@@ -282,6 +323,13 @@ public class Player : MonoBehaviour
             Debug.Log("INTERACTIVE EXIT");
             _bossFightStart = null;
             bossFightStart.HideTooltip();
+        }
+        
+        if (other.TryGetComponent<Burger>(out var burger))
+        {
+            Debug.Log("INTERACTIVE EXIT");
+            _burgerInView = null;
+            burger.HideTooltip();
         }
     }
 
@@ -303,5 +351,20 @@ public class Player : MonoBehaviour
         HUD.Instance.FadeIn(0.5f);
 
         yield return new WaitForSeconds(0.5f);
+    }
+
+    public void MoveTo(Vector3 teleportTargetPosition)
+    {
+        rb.MovePosition(teleportTargetPosition);
+    }
+
+    public void SetModeCarrying()
+    {
+    
+    }
+    
+    public void SetModeNotCarrying()
+    {
+    
     }
 }

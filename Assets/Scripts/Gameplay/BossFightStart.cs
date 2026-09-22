@@ -7,9 +7,8 @@ using MoreMountains.Feedbacks;
 
 public class BossFightStart : MonoBehaviour
 {
-    
-    private Player player;
-    private CinemachineBrain brain;
+    private Player _player;
+    private CinemachineBrain _brain;
 
     [SerializeField]
     private Transform teleportTarget;
@@ -28,38 +27,39 @@ public class BossFightStart : MonoBehaviour
 
     [Header("Floating Variables")]
     [SerializeField]
-    float amplitude = 0.5f;
+    private float amplitude = 0.5f;
+
     [SerializeField]
-    float frequency = 1f;
+    private float frequency = 1f;
+
     [SerializeField]
-    float degreePerSecond = 15.0f;
-    GameObject ingreident;
-    
-    Vector3 startPos;
-    Vector3 endPos;
+    private float degreePerSecond = 15.0f;
+
+    private GameObject _ingredient;
+
+    private Vector3 _startPos;
+    private Vector3 _endPos;
 
 
     public void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        ingreident = GetComponentInChildren<IngredientRef>().gameObject;
-        startPos = ingreident.transform.position;
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _ingredient = GetComponentInChildren<IngredientRef>().gameObject;
+        _startPos = _ingredient.transform.position;
         // Get the active virtual camera via the Cinemachine Brain
-
     }
 
     public void Update()
     {
         if (degreePerSecond != 0)
         {
-            ingreident.transform.Rotate(new Vector3(0f, degreePerSecond * Time.deltaTime, 0f), Space.World);
+            _ingredient.transform.Rotate(new Vector3(0f, degreePerSecond * Time.deltaTime, 0f), Space.World);
         }
 
-        endPos = startPos;
-        endPos.y += Mathf.Sin(Time.time * Mathf.PI * frequency) * amplitude;
+        _endPos = _startPos;
+        _endPos.y += Mathf.Sin(Time.time * Mathf.PI * frequency) * amplitude;
 
-        ingreident.transform.position = endPos;
-        
+        _ingredient.transform.position = _endPos;
     }
 
     public void ShowTooltip()
@@ -80,7 +80,7 @@ public class BossFightStart : MonoBehaviour
 
     private IEnumerator DoTeleport(Player callee)
     {
-        player.GetComponent<Rigidbody>().MovePosition(teleportTarget.position);
+        Player.Instance.MoveTo(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
