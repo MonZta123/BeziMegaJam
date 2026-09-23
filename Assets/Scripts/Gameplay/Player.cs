@@ -324,7 +324,7 @@ public class Player : MonoBehaviour
         if (_carryingBurger)
             return;
 
-        if (other.TryGetComponent<BossFightStart>(out var bossFightStart))
+        if (other.TryGetComponent<BossFightStart>(out var bossFightStart) && bossFightStart.isActive)
         {
             Debug.Log("INTERACTIVE ENTERED");
             _bossFightStart = bossFightStart;
@@ -365,14 +365,10 @@ public class Player : MonoBehaviour
     }
 
     private Delivery _deliveryInView;
-    public GameObject triggerCounter;
 
     public void GoBackToKitchen(GameObject callee)
     {
         LockControls(true);
-        Debug.Log(triggerCounter);
-        triggerCounter.GetComponent<BossFightStart>().activeFeedback.StopFeedbacks();
-        triggerCounter = null;
         HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee, _startPosition)));
     }
 

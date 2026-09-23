@@ -48,7 +48,7 @@ public class BossFightStart : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _ingredient = GetComponentInChildren<IngredientRef>().gameObject;
         _startPos = _ingredient.transform.position;
-        activeFeedback.PlayFeedbacks();
+        Reset();
         // Get the active virtual camera via the Cinemachine Brain
     }
 
@@ -88,12 +88,30 @@ public class BossFightStart : MonoBehaviour
 
     private IEnumerator DoTeleport(Player callee)
     {
-        callee.triggerCounter = gameObject;
         callee.MoveTo(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
         callee.LockControls(false);
         HUD.Instance.FadeIn(0.5f);
+
+        isActive = false;
+        var particles = GetComponentsInChildren<ParticleSystem>();
+
+        foreach (var ps in particles)
+        {
+            ps.Stop(false);
+        }
+    }
+
+    public void Reset()
+    {
+        isActive = true;
+        var particles = GetComponentsInChildren<ParticleSystem>();
+
+        foreach (var ps in particles)
+        {
+            ps.Play(); 
+        }
     }
 }
