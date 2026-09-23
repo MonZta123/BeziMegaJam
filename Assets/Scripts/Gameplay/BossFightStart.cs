@@ -41,6 +41,7 @@ public class BossFightStart : MonoBehaviour
     private Vector3 _startPos;
     private Vector3 _endPos;
 
+    public bool isActive = true;
 
     public void Start()
     {
