@@ -370,6 +370,7 @@ public class Player : MonoBehaviour
     public void GoBackToKitchen(GameObject callee)
     {
         LockControls(true);
+        Debug.Log(triggerCounter);
         triggerCounter.GetComponent<BossFightStart>().activeFeedback.StopFeedbacks();
         triggerCounter = null;
         HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee, _startPosition)));
