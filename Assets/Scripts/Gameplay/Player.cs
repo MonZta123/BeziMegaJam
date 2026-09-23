@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     {
         if (!_playerInput)
             return;
-        
+
         _playerInput.actions["attack"].performed -= OnAttack;
         _playerInput.actions["interact"].performed -= OnInteract;
         _playerInput.actions["jump"].performed -= OnJumping;
@@ -123,7 +123,9 @@ public class Player : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
-        Debug.Log("ESC HIT");
+        if (EndScreenManager.Instance.ScreenLocked)
+            return;
+
         var instance = PauseMenuManager.Instance;
 
         if (instance.PauseIsActive)
@@ -161,24 +163,24 @@ public class Player : MonoBehaviour
     }
 
     private Burger _carryingBurger;
-    
+
     private void OnInteract(InputAction.CallbackContext ctx)
-    {
+    {    EndScreenManager.Instance.ShowLoseScreen();
         if (_carryingBurger)
         {
             if (_deliveryInView)
             {
                 // Deliver Burger
                 OrderSystem.Instance.DeliverBurger(_carryingBurger);
-                
+
                 _deliveryInView.HideTooltip();
-                _deliveryInView = null; 
+                _deliveryInView = null;
             }
             else
             {
                 _carryingBurger.Drop();
             }
-            
+
             _carryingBurger = null;
             rightHandRig.weight = 0.0f;
 
@@ -186,7 +188,7 @@ public class Player : MonoBehaviour
             trigger.enabled = true;
             return;
         }
-        
+
         if (_burgerInView)
         {
             _carryingBurger = _burgerInView;
@@ -196,7 +198,7 @@ public class Player : MonoBehaviour
             _bossFightStart = null;
             return;
         }
-        
+
         _bossFightStart?.Trigger(this);
         _bossFightStart = null;
     }
@@ -244,7 +246,7 @@ public class Player : MonoBehaviour
                         {
                             behaviour.TakeDamage(1);
                         }
-                    }        
+                    }
                 }
             }
 
@@ -271,14 +273,14 @@ public class Player : MonoBehaviour
                 transform.LookAt(transform.position + new Vector3(move.x, 0, move.y), Vector3.up);
 
             rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
-            
+
             if (animator)
             {
                 animator.SetBool(s_isGrounded, IsGrounded);
                 animator.SetFloat(s_moveSpeed, move.magnitude);
             }
         }
-        
+
         _debugMove = move.magnitude;
 
         _attack = false;
@@ -318,17 +320,17 @@ public class Player : MonoBehaviour
             _deliveryInView = delivery;
             _deliveryInView.ShowTooltip();
         }
-        
+
         if (_carryingBurger)
             return;
-        
+
         if (other.TryGetComponent<BossFightStart>(out var bossFightStart))
         {
             Debug.Log("INTERACTIVE ENTERED");
             _bossFightStart = bossFightStart;
             _bossFightStart.ShowTooltip();
         }
-        
+
         if (other.TryGetComponent<Burger>(out var burger) && burger.GetIsFinished())
         {
             _burgerInView = burger;
@@ -346,7 +348,7 @@ public class Player : MonoBehaviour
             _bossFightStart = null;
             bossFightStart.HideTooltip();
         }
-        
+
         if (other.TryGetComponent<Burger>(out var burger))
         {
             Debug.Log("INTERACTIVE EXIT");
@@ -361,7 +363,7 @@ public class Player : MonoBehaviour
             delivery.HideTooltip();
         }
     }
-    
+
     private Delivery _deliveryInView;
 
     public void GoBackToKitchen(GameObject callee)
@@ -375,7 +377,7 @@ public class Player : MonoBehaviour
         rb.MovePosition(position);
 
         Destroy(callee);
-        
+
         yield return new WaitForSeconds(0.5f);
 
         LockControls(false);
@@ -391,11 +393,9 @@ public class Player : MonoBehaviour
 
     public void SetModeCarrying()
     {
-    
     }
-    
+
     public void SetModeNotCarrying()
     {
-    
     }
 }

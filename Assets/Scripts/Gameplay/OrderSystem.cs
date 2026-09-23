@@ -1,49 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameplay.ReferenceScripts;
+using TMPro;
+using UI;
 using UnityEngine;
 
 namespace Gameplay
 {
-    public enum Ingredient { Bun, Cheese, Meat, Lettuce };
-
-    public class Order
-    {
-        public bool Bun { get; set; }
-        public bool Cheese { get; set; }
-        public bool Meat { get; set; }
-        public bool Lettuce { get; set; }
-    }
-
     public class OrderSystem : MonoBehaviour
     {
         [SerializeField]
-        private float timeInSecondsUntilOrderCancelled;
+        private int timeInSecondsUntilOrderCancelled = 180;
 
         [SerializeField]
-        private int maxErrorsUntilDead;
+        private int howManyFailedOrderUntilDead = 3;
+
+        [SerializeField]
+        private int howManyOrdersToWin = 5;
 
         [SerializeField]
         private Burger burgerPrefab;
+
+        [SerializeField]
+        private TextMeshPro timer;
+        
+        [SerializeField]
+        private TextMeshPro ingredients;
+        
+        [SerializeField]
+        private TextMeshPro ordersLeft;
 
         private int _errors;
 
         private float _lastOrderStarted;
 
-        private Order _currentOrder;
+        private List<BurgerPart> _currentOrder;
 
-        private Order _collected;
+        private List<BurgerPart> _collected;
+
+        private int _timeLeftInSeconds;
+
+        private float _timer;
+
+        private int _ordersLeft;
+
+        private int _totalTimeInSeconds;
+
+        private string SecondsIntoText(int seconds)
+        {
+            var min = seconds / 60;
+            var sec = seconds % 60;
+
+            return $"{min}m {sec}s";
+        }
         
         public static OrderSystem Instance { get; private set; }
 
         private void Awake()
         {
             Instance = this;
+            _ordersLeft = howManyOrdersToWin;
+
+            InitNewOrder();
         }
 
-        private Order BuildNewOrder()
+        private List<BurgerPart> BuildNewOrder()
         {
-            return new Order() { Bun = true, Cheese = true, Meat = true, Lettuce = true };
+            // Todo: Change order maybe?
+            return new List<BurgerPart>() { BurgerPart.TopBun, BurgerPart.Patty, BurgerPart.BottomBun };
         }
 
         public void DeliverBurger(Burger burger)
@@ -51,10 +75,23 @@ namespace Gameplay
             Destroy(burger.gameObject);
             var originalPosition = burger.GetOriginalPosition();
             Instantiate(burgerPrefab, originalPosition.Item1, originalPosition.Item2);
+
+            _ordersLeft--;
+
+            if (_ordersLeft <= 0)
+            {
+                Win();
+            }
+
+            InitNewOrder();
         }
-        
-        public void AddToCurrentOrder(Ingredient ingredient)
+
+        private void InitNewOrder()
         {
+            _timer = 0;
+            _timeLeftInSeconds = timeInSecondsUntilOrderCancelled;
+            timer.text = SecondsIntoText(_timeLeftInSeconds);
+            ordersLeft.text = _ordersLeft.ToString();
         }
 
         private bool _hasLost;
@@ -63,12 +100,29 @@ namespace Gameplay
         {
             if (_hasLost) return;
 
+            _timer += Time.deltaTime;
+
+            if (_timer >= 1f)
+            {
+                _timer -= 1f;
+                _timeLeftInSeconds--;
+
+                timer.text = SecondsIntoText(_timeLeftInSeconds);
+
+                _totalTimeInSeconds++;
+                
+                if (_timeLeftInSeconds <= 0)
+                {
+                    Dead();
+                }
+            }
+            
             if (_currentOrder == null)
             {
                 _lastOrderStarted = Time.timeSinceLevelLoad;
 
                 _currentOrder = BuildNewOrder();
-                _collected = new Order();
+                _collected = new List<BurgerPart>();
             }
 
             if (Time.timeSinceLevelLoad - _lastOrderStarted > timeInSecondsUntilOrderCancelled)
@@ -77,11 +131,25 @@ namespace Gameplay
 
                 _errors++;
 
-                if (_errors >= maxErrorsUntilDead)
+                if (_errors >= howManyFailedOrderUntilDead)
                 {
-                    // Dead
+                    Dead();
                 }
             }
+        }
+
+        private void Dead()
+        {
+            _hasLost = true;
+            
+            Player.Instance.LockControls(true);
+            
+            // ShowUI
+        }
+
+        private void Win()
+        {
+            EndScreenManager.Instance.ShowWinScreen(_totalTimeInSeconds);
         }
 
         public List<BurgerPart> GetIngredients()

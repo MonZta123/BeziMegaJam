@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -32,12 +33,12 @@ public class PauseMenuManager : MonoBehaviour
     private AudioMixer audioMixer;
 
     public bool PauseIsActive => pauseMenuPanel.activeSelf;
-    
+
     private void Awake()
     {
         Instance = this;
     }
-    
+
     private float _masterVolume;
     private float _musicVolume;
     private float _sfxVolume;
@@ -55,7 +56,7 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
     }
-    
+
     public void SettingsClicked()
     {
         pauseMenuPanel.SetActive(false);
@@ -132,7 +133,7 @@ public class PauseMenuManager : MonoBehaviour
     public void ConfirmQuitClicked()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        HUD.Instance.FadeOut(0.5f, () => SceneManager.LoadScene("MainMenu"));
     }
 
     public void CancelQuitClicked()

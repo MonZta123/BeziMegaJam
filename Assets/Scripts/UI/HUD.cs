@@ -33,6 +33,8 @@ namespace UI
         private void Awake()
         {
             Instance = this;
+
+            StartCoroutine(DoFadeIn(0.5f));
         }
 
         public void FadeOut(float duration, Action andThen = null)
@@ -44,13 +46,14 @@ namespace UI
         {
             StartCoroutine(DoFadeIn(duration));
         }
-
+        
         private IEnumerator DoFadeOut(float duration, Action andThen)
         {
             yield return null;
 
             float count = 0;
 
+            fade.gameObject.SetActive(true);
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 0);
 
             while (count < duration)
@@ -70,7 +73,7 @@ namespace UI
             yield return null;
 
             float count = 0;
-
+            fade.gameObject.SetActive(true);
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 1);
 
             while (count < duration)
@@ -82,6 +85,7 @@ namespace UI
             }
 
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 0);
+            fade.gameObject.SetActive(false);
         }
     }
 }

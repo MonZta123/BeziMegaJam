@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6801505444244112018}
   - component: {fileID: 437236916011312578}
   m_Layer: 0
-  m_Name: PattyBoss
+  m_Name: TopBunBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,4 +130,3 @@ MonoBehaviour:
   health: 10
   meshRenderer: {fileID: 6766375414416394461, guid: ca66a9a273343194f8b46be37c938090, type: 3}
   flashMaterial: {fileID: 2100000, guid: ec60e88fd8fdc0d4caae75e367922560, type: 2}
-  reward: 1
