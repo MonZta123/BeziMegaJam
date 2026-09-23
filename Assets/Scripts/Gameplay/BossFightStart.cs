@@ -35,9 +35,6 @@ public class BossFightStart : MonoBehaviour
 
     [SerializeField]
     private float degreePerSecond = 15.0f;
-    
-    [SerializeField]
-    private MMF_Player floatingFeedback;
 
     private GameObject _ingredient;
 
@@ -51,7 +48,7 @@ public class BossFightStart : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _ingredient = GetComponentInChildren<IngredientRef>().gameObject;
         _startPos = _ingredient.transform.position;
-        activeFeedback.PlayFeedbacks();
+        Reset();
         // Get the active virtual camera via the Cinemachine Brain
     }
 
@@ -99,12 +96,22 @@ public class BossFightStart : MonoBehaviour
         HUD.Instance.FadeIn(0.5f);
 
         isActive = false;
-        floatingFeedback.StopFeedbacks();
+        var particles = GetComponentsInChildren<ParticleSystem>();
+
+        foreach (var ps in particles)
+        {
+            ps.Stop(false);
+        }
     }
 
     public void Reset()
     {
         isActive = true;
-        floatingFeedback.PlayFeedbacks();
+        var particles = GetComponentsInChildren<ParticleSystem>();
+
+        foreach (var ps in particles)
+        {
+            ps.Play(); 
+        }
     }
 }
