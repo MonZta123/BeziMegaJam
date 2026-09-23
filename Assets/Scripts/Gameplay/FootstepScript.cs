@@ -1,16 +1,15 @@
-﻿using MoreMountains.Feedbacks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay
 {
     public class FootstepScript : MonoBehaviour
     {
         [SerializeField]
-        public MMF_Player footstepFeedback;
+        private AudioSource audioSource;
         
         public void PlayFootstep()
         {
-            footstepFeedback.PlayFeedbacks();
+            audioSource.Play();
         }
     }
 }
