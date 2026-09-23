@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Gameplay;
 using Gameplay.ReferenceScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -165,7 +166,19 @@ public class Player : MonoBehaviour
     {
         if (_carryingBurger)
         {
-            _carryingBurger.Drop();
+            if (_deliveryInView)
+            {
+                // Deliver Burger
+                OrderSystem.Instance.DeliverBurger(_carryingBurger);
+                
+                _deliveryInView.HideTooltip();
+                _deliveryInView = null; 
+            }
+            else
+            {
+                _carryingBurger.Drop();
+            }
+            
             _carryingBurger = null;
             rightHandRig.weight = 0.0f;
 
@@ -300,6 +313,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.TryGetComponent<Delivery>(out var delivery) && _carryingBurger)
+        {
+            _deliveryInView = delivery;
+            _deliveryInView.ShowTooltip();
+        }
+        
         if (_carryingBurger)
             return;
         
@@ -310,7 +329,7 @@ public class Player : MonoBehaviour
             _bossFightStart.ShowTooltip();
         }
         
-        if (other.TryGetComponent<Burger>(out var burger))
+        if (other.TryGetComponent<Burger>(out var burger) && burger.GetIsFinished())
         {
             _burgerInView = burger;
             _burgerInView.ShowTooltip();
@@ -334,7 +353,16 @@ public class Player : MonoBehaviour
             _burgerInView = null;
             burger.HideTooltip();
         }
+
+        if (other.TryGetComponent<Delivery>(out var delivery))
+        {
+            Debug.Log("INTERACTIVE EXIT");
+            _deliveryInView = delivery;
+            delivery.HideTooltip();
+        }
     }
+    
+    private Delivery _deliveryInView;
 
     public void GoBackToKitchen(GameObject callee)
     {

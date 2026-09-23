@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using Gameplay.ReferenceScripts;
+using UnityEngine;
 
 namespace Gameplay
 {
@@ -20,6 +23,9 @@ namespace Gameplay
         [SerializeField]
         private int maxErrorsUntilDead;
 
+        [SerializeField]
+        private Burger burgerPrefab;
+
         private int _errors;
 
         private float _lastOrderStarted;
@@ -27,12 +33,26 @@ namespace Gameplay
         private Order _currentOrder;
 
         private Order _collected;
+        
+        public static OrderSystem Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private Order BuildNewOrder()
         {
             return new Order() { Bun = true, Cheese = true, Meat = true, Lettuce = true };
         }
 
+        public void DeliverBurger(Burger burger)
+        {
+            Destroy(burger.gameObject);
+            var originalPosition = burger.GetOriginalPosition();
+            Instantiate(burgerPrefab, originalPosition.Item1, originalPosition.Item2);
+        }
+        
         public void AddToCurrentOrder(Ingredient ingredient)
         {
         }
@@ -62,6 +82,11 @@ namespace Gameplay
                     // Dead
                 }
             }
+        }
+
+        public List<BurgerPart> GetIngredients()
+        {
+            return new List<BurgerPart>() { BurgerPart.TopBun, BurgerPart.BottomBun, BurgerPart.Patty };
         }
     }
 }
