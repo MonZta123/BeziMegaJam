@@ -10741,6 +10741,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac27278ad5f7a5e41a00570473ec2437, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1103024184}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac27278ad5f7a5e41a00570473ec2437, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1103024187}
   m_SourcePrefab: {fileID: 100100000, guid: ac27278ad5f7a5e41a00570473ec2437, type: 3}
 --- !u!4 &1103024182 stripped
 Transform:
@@ -10773,6 +10776,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.0006895, y: 0.021507272, z: 4.0006895}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1103024187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103024183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 3d2babb753bf6ae418e4a0c64c6d0c9f, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1103637487
 GameObject:
   m_ObjectHideFlags: 0
@@ -12726,6 +12761,10 @@ PrefabInstance:
       propertyPath: bossPosition
       value: 
       objectReference: {fileID: 1447548612}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
@@ -20415,6 +20454,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
       objectReference: {fileID: 1975609736}
@@ -20667,6 +20710,10 @@ PrefabInstance:
       propertyPath: bossPosition
       value: 
       objectReference: {fileID: 1447548612}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 

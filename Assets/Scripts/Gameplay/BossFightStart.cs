@@ -100,7 +100,7 @@ public class BossFightStart : MonoBehaviour
 
         foreach (var ps in particles)
         {
-            ps.Stop(false);
+            ps.Stop();
         }
     }
 

@@ -113,6 +113,8 @@ public class Player : MonoBehaviour
     {
         _health -= value;
         _health = Math.Max(_health, 0);
+        
+        HealthSystem.Instance.TakeDamagePlayer(value);
 
         if (_health <= 0)
         {
