@@ -619,6 +619,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35076566}
   m_Mesh: {fileID: 1385990396969797544, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
+--- !u!114 &37117827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 2140125576}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6f69da0b73f31438ecf44940712aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Teleporter
 --- !u!114 &37843242 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6772730926434723941, guid: cf2854093214cf442a0cf6ba625ffe51, type: 3}
@@ -8775,6 +8786,10 @@ MonoBehaviour:
   timer: {fileID: 203925977}
   ingredients: {fileID: 1394646996}
   ordersLeft: {fileID: 109245806}
+  bossFightStarts:
+  - {fileID: 1191140682}
+  - {fileID: 37117827}
+  - {fileID: 2039543433}
 --- !u!1 &924616781
 GameObject:
   m_ObjectHideFlags: 0
@@ -11472,6 +11487,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1191140682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 3611739073076095272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6f69da0b73f31438ecf44940712aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Teleporter
 --- !u!1 &1210584839
 GameObject:
   m_ObjectHideFlags: 0
@@ -18647,6 +18673,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18725109, y: 2.4022222, z: 1.968}
   m_Center: {x: 0, y: 0, z: 0.00000017881393}
+--- !u!114 &2039543433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 1285281438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6f69da0b73f31438ecf44940712aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Teleporter
 --- !u!1001 &2040486466
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameplay.ReferenceScripts;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -30,6 +31,9 @@ namespace Gameplay
         [SerializeField]
         private TextMeshPro ordersLeft;
 
+        [SerializeField]
+        private List<BossFightStart> bossFightStarts;
+        
         private int _errors;
 
         private float _lastOrderStarted;
@@ -92,6 +96,8 @@ namespace Gameplay
             _timeLeftInSeconds = timeInSecondsUntilOrderCancelled;
             timer.text = SecondsIntoText(_timeLeftInSeconds);
             ordersLeft.text = _ordersLeft.ToString();
+
+            bossFightStarts.ForEach(n => n.activeFeedback.PlayFeedbacksTopToBottom());
         }
 
         private bool _hasLost;
