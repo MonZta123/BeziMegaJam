@@ -8,7 +8,6 @@ using MoreMountains.Feedbacks;
 public class BossFightStart : MonoBehaviour
 {
     private Player _player;
-    private CinemachineBrain _brain;
 
     [SerializeField]
     private Transform teleportTarget;
@@ -75,14 +74,20 @@ public class BossFightStart : MonoBehaviour
         HUD.Instance.HideTooltip();
     }
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource _audioSource;
+
     public void Trigger(Player callee)
     {
+        _audioSource.Play();
         callee.LockControls(true);
         HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee)));
     }
 
     private IEnumerator DoTeleport(Player callee)
     {
+        callee.triggerCounter = gameObject;
         callee.MoveTo(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
