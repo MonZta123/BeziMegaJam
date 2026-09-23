@@ -10,7 +10,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     private int health;
 
     [SerializeField]
-    private MeshRenderer meshRenderer;
+    private SkinnedMeshRenderer meshRenderer;
 
     [SerializeField]
     private Material flashMaterial;
@@ -21,7 +21,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     [SerializeField]
     private BurgerPart reward;
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         HealthSystem.Instance.HideBossHealth();
         
@@ -30,7 +30,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     public abstract void OnDeath();
 
-    private void Awake()
+    protected virtual void Awake()
     {
         HealthSystem.Instance.ShowBossHealth(health);
         
