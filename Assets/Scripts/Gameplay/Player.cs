@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Gameplay;
 using Gameplay.ReferenceScripts;
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
     private Burger _carryingBurger;
 
     private void OnInteract(InputAction.CallbackContext ctx)
-    {    EndScreenManager.Instance.ShowLoseScreen();
+    {
         if (_carryingBurger)
         {
             if (_deliveryInView)
@@ -365,10 +365,13 @@ public class Player : MonoBehaviour
     }
 
     private Delivery _deliveryInView;
+    public GameObject triggerCounter;
 
     public void GoBackToKitchen(GameObject callee)
     {
         LockControls(true);
+        triggerCounter.GetComponent<BossFightStart>().activeFeedback.StopFeedbacks();
+        triggerCounter = null;
         HUD.Instance.FadeOut(0.5f, () => StartCoroutine(DoTeleport(callee, _startPosition)));
     }
 

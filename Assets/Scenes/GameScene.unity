@@ -8770,7 +8770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.OrderSystem
   timeInSecondsUntilOrderCancelled: 180
   howManyFailedOrderUntilDead: 3
-  howManyOrdersToWin: 1
+  howManyOrdersToWin: 5
   burgerPrefab: {fileID: 3470567632181660520, guid: 5cac72817616a2b43bc2c5d02890b573, type: 3}
   timer: {fileID: 203925977}
   ingredients: {fileID: 1394646996}

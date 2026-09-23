@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1024848595224900949}
@@ -2489,9 +2489,9 @@ MonoBehaviour:
   animatedLights:
   - light: {fileID: 7710086954383210093}
     loop: 1
-    animateIntensity: 1
-    intensityStart: 21.112127
-    intensityEnd: 4.594794
+    animateIntensity: 0
+    intensityStart: 1
+    intensityEnd: 1
     intensityDuration: 0.4
     intensityCurve:
       serializedVersion: 2
@@ -8357,7 +8357,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.99215686, g: 0.86176467, b: 0.47058818, a: 1}
   m_Intensity: 0
-  m_Range: 4
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 10, y: 10}
