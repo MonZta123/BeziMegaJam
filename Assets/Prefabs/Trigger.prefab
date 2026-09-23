@@ -757,6 +757,7 @@ MonoBehaviour:
   amplitude: 0.2
   frequency: 0.5
   degreePerSecond: 15
+  isActive: 1
   _audioSource: {fileID: 1426619207199974512}
 --- !u!95 &1386097175449671631
 Animator:
