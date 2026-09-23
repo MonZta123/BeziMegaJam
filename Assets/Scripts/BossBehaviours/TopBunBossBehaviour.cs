@@ -95,12 +95,18 @@ namespace BossBehaviours
                 _startedWaitingTime = Time.time;
             }
 
-            if (_mode == TopBunBossMode.Waiting && _startedWaitingTime + 2f < Time.time)
+            if (_mode == TopBunBossMode.Waiting)
             {
-                var pos = Player.Instance.transform.position;
-                pos.y = transform.position.y;
-                transform.LookAt(pos);
-                _mode = TopBunBossMode.Shooting;
+                if (_startedWaitingTime + 2f < Time.time)
+                {
+                    _mode = TopBunBossMode.Shooting;
+                }
+                else
+                {
+                    var pos = Player.Instance.transform.position;
+                    pos.y = transform.position.y;
+                    transform.LookAt(pos);
+                }
             }
 
             if (_mode == TopBunBossMode.Shooting)
