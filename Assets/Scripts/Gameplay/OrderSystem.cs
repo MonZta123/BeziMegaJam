@@ -97,7 +97,10 @@ namespace Gameplay
             timer.text = SecondsIntoText(_timeLeftInSeconds);
             ordersLeft.text = _ordersLeft.ToString();
 
-            bossFightStarts.ForEach(n => n.activeFeedback.PlayFeedbacksTopToBottom());
+            bossFightStarts.ForEach(n =>
+            {
+                n.Reset();
+            });
         }
 
         private bool _hasLost;

@@ -35,6 +35,9 @@ public class BossFightStart : MonoBehaviour
 
     [SerializeField]
     private float degreePerSecond = 15.0f;
+    
+    [SerializeField]
+    private MMF_Player floatingFeedback;
 
     private GameObject _ingredient;
 
@@ -88,12 +91,20 @@ public class BossFightStart : MonoBehaviour
 
     private IEnumerator DoTeleport(Player callee)
     {
-        callee.triggerCounter = gameObject;
         callee.MoveTo(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
         callee.LockControls(false);
         HUD.Instance.FadeIn(0.5f);
+
+        isActive = false;
+        floatingFeedback.StopFeedbacks();
+    }
+
+    public void Reset()
+    {
+        isActive = true;
+        floatingFeedback.PlayFeedbacks();
     }
 }

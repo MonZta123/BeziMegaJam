@@ -9091,6 +9091,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2963892465686543081, guid: 6bd68dac681b8584dadb7caccdb3b4ab, type: 3}
   m_PrefabInstance: {fileID: 988362336}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &973349879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5458480466355223727, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 1285281438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MoreMountains.Tools::MoreMountains.Feedbacks.MMF_Player
 --- !u!1001 &988362336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12642,6 +12653,10 @@ PrefabInstance:
       propertyPath: bouncingFeedback
       value: 
       objectReference: {fileID: 1285281442}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: floatingFeedback
+      value: 
+      objectReference: {fileID: 973349879}
     - target: {fileID: 6169075954402995995, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -15157,6 +15172,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6710239, y: 2.4022222, z: 0.67125106}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
+--- !u!114 &1568987664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5458480466355223727, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 2140125576}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MoreMountains.Tools::MoreMountains.Feedbacks.MMF_Player
 --- !u!1 &1600074969
 GameObject:
   m_ObjectHideFlags: 0
@@ -19935,6 +19961,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5633550738510628296, guid: 205bdf112bb638d4cbdc2569c261e62a, type: 3}
   m_PrefabInstance: {fileID: 2100348622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2103523770 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5458480466355223727, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+  m_PrefabInstance: {fileID: 3611739073076095272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MoreMountains.Tools::MoreMountains.Feedbacks.MMF_Player
 --- !u!1001 &2112750840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20159,6 +20196,10 @@ PrefabInstance:
       propertyPath: bouncingFeedback
       value: 
       objectReference: {fileID: 2140125580}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: floatingFeedback
+      value: 
+      objectReference: {fileID: 1568987664}
     - target: {fileID: 6169075954402995995, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -20407,6 +20448,10 @@ PrefabInstance:
       propertyPath: bouncingFeedback
       value: 
       objectReference: {fileID: 229787887}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: floatingFeedback
+      value: 
+      objectReference: {fileID: 2103523770}
     - target: {fileID: 5397901164100937022, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: m_Mesh
       value: 
