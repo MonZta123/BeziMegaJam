@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UI;
 using UnityEngine;
 using Unity.Cinemachine;
@@ -24,6 +24,8 @@ public class BossFightStart : MonoBehaviour
 
     [SerializeField]
     public MMF_Player bouncingFeedback;
+    [SerializeField]
+    public MMF_Player activeFeedback;
 
     [Header("Floating Variables")]
     [SerializeField]
@@ -46,6 +48,7 @@ public class BossFightStart : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _ingredient = GetComponentInChildren<IngredientRef>().gameObject;
         _startPos = _ingredient.transform.position;
+        activeFeedback.PlayFeedbacks();
         // Get the active virtual camera via the Cinemachine Brain
     }
 
