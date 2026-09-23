@@ -12762,6 +12762,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
       objectReference: {fileID: 1975609736}
@@ -20450,6 +20454,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1447548612}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
       objectReference: {fileID: 1975609736}
@@ -20702,6 +20710,10 @@ PrefabInstance:
       propertyPath: bossPosition
       value: 
       objectReference: {fileID: 1447548612}
+    - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
+      propertyPath: activeFeedback
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3042697762313217854, guid: c0e06ae98598a9841baa42673d356121, type: 3}
       propertyPath: teleportTarget
       value: 
