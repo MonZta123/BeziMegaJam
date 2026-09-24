@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Gameplay.ReferenceScripts;
 using UI;
@@ -25,7 +25,9 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     {
         HealthSystem.Instance.HideBossHealth();
         
-        Burger.CurrentBurger.AddBurgerPart(reward);
+        Burger currentBurger = Burger.CurrentBurger;
+        if (currentBurger)
+            currentBurger.AddBurgerPart(reward);
     }
 
     public abstract void OnDeath();
