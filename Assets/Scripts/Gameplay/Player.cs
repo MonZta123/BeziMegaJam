@@ -113,9 +113,15 @@ public class Player : MonoBehaviour
     }
 
     private int _health;
-
     private int _maxHealth;
 
+    public void SetCheckpoint(Vector3 position)
+    {
+        _checkpointPosition = position;
+    }
+    
+    private Vector3 _checkpointPosition;
+    
     public void SetHealth(int value)
     {
         _health = value;
@@ -135,8 +141,17 @@ public class Player : MonoBehaviour
             dieAudio.Play();
             // EndScreenManager.Instance.ShowLoseScreen();
             HealthSystem.Instance.SetCurrentHealthPlayer(_maxHealth);
-            Debug.Log(_maxHealth);
-            BossMonoBehaviour.Instance.AddHealth(_maxHealth);
+            LockControls(true);
+            
+            
+            HUD.Instance.FadeOut(0.5f, () =>
+            {
+                transform.position = _checkpointPosition;
+                
+                LockControls(false);
+                BossMonoBehaviour.Instance.AddHealth(_maxHealth);
+                HUD.Instance.FadeIn(0.5f);
+            });
             
             _health = _maxHealth;
             // get cooked

@@ -89,6 +89,7 @@ public class BossFightStart : MonoBehaviour
     private IEnumerator DoTeleport(Player callee)
     {
         callee.MoveTo(teleportTarget.position);
+        callee.SetCheckpoint(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
