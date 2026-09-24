@@ -21,9 +21,13 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     [SerializeField]
     private BurgerPart reward;
     private AudioSource _deathSound;
+    public bool IsDead { get; private set; }
+
     protected void OnDestroy()
     {
         HealthSystem.Instance.HideBossHealth();
+
+        IsDead = true;
         
         Burger currentBurger = Burger.CurrentBurger;
         if (currentBurger)

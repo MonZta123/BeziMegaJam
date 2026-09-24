@@ -75,6 +75,19 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 5d62557e6d825fb439aa29082a2c6a82, type: 2}
   reward: 1
   animator: {fileID: 5523660010192650113}
+  cannon: {fileID: -8971677745052203009, guid: 5c7c69bca26337540b22791a5cae56fb, type: 3}
+  cannonPositions:
+  - {x: 37.22, y: 0, z: -23.74}
+  - {x: 36.78, y: 0, z: -27.84}
+  - {x: 43.58, y: 0, z: -19.74}
+  - {x: 45.3, y: 0, z: -27.94}
+  - {x: 40.63, y: 0, z: -27.28}
+  cannonRotations:
+  - {x: 0, y: 0.79964274, z: 0, w: 0.6004761}
+  - {x: 0, y: 0.37605447, z: 0, w: 0.9265976}
+  - {x: 0, y: 0.99407816, z: 0, w: 0.10866737}
+  - {x: 0, y: 0.26949978, z: 0, w: -0.9630005}
+  - {x: 0, y: -0.4001651, z: 0, w: -0.91644305}
 --- !u!1 &8264352305251954689
 GameObject:
   m_ObjectHideFlags: 0
