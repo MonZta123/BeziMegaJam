@@ -76,6 +76,7 @@ namespace Gameplay
 
         public void DeliverBurger(Burger burger)
         {
+            burger.GetComponent<AudioSource>().Play();
             Destroy(burger.gameObject);
             var originalPosition = burger.GetOriginalPosition();
             Instantiate(burgerPrefab, originalPosition.Item1, originalPosition.Item2);
