@@ -7037,37 +7037,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598527765}
   m_CullTransparentMesh: 1
---- !u!1 &622236359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 622236360}
-  m_Layer: 0
-  m_Name: CannonPosition 1 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &622236360
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622236359}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.26950222, z: -0, w: -0.9629998}
-  m_LocalPosition: {x: 45.3, y: 0, z: -27.94}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 328.731, z: 0}
 --- !u!1001 &624101241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11327,37 +11296,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7fef0179c99cf5468b3f882150eba75, type: 3}
   m_PrefabInstance: {fileID: 467725807}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1064588535
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1064588536}
-  m_Layer: 0
-  m_Name: CannonPosition 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1064588536
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064588535}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7996413, z: -0, w: 0.600478}
-  m_LocalPosition: {x: 37.22, y: 0, z: -23.74}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 106.192, z: 0}
 --- !u!1 &1066516558
 GameObject:
   m_ObjectHideFlags: 0
@@ -13726,37 +13664,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1245395096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1245395097}
-  m_Layer: 0
-  m_Name: CannonPosition 1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1245395097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245395096}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9940786, z: -0, w: 0.10866371}
-  m_LocalPosition: {x: 43.58, y: 0, z: -19.74}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 167.523, z: 0}
 --- !u!1001 &1250179568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17249,37 +17156,6 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 7471621019377497902, guid: 9ed14b110e905bb4e8a8467ba93fd0e4, type: 3}
   m_PrefabInstance: {fileID: 494151134}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1516606020
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1516606021}
-  m_Layer: 0
-  m_Name: CannonPosition 1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1516606021
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516606020}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.37605873, z: -0, w: 0.9265958}
-  m_LocalPosition: {x: 36.78, y: 0, z: -27.84}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 44.179, z: 0}
 --- !u!4 &1519289452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2062019789761228346, guid: fa4408799c7d31c4f90d96891aa29991, type: 3}
@@ -21822,37 +21698,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024861507}
   m_Mesh: {fileID: 8733429697405204941, guid: 889517d2498e6cf4c82e2b62c2226220, type: 3}
---- !u!1 &2026563642
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2026563643}
-  m_Layer: 0
-  m_Name: CannonPosition 1 (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2026563643
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026563642}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.40016836, z: -0, w: -0.9164416}
-  m_LocalPosition: {x: 40.63, y: 0, z: -27.28}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 407.177, z: 0}
 --- !u!4 &2029840078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4058265578630050888, guid: 640e4b0f8e1ec7e4390a3263499ad990, type: 3}
@@ -24250,8 +24095,3 @@ SceneRoots:
   - {fileID: 852121072}
   - {fileID: 1830866559}
   - {fileID: 753227167}
-  - {fileID: 1064588536}
-  - {fileID: 1516606021}
-  - {fileID: 1245395097}
-  - {fileID: 622236360}
-  - {fileID: 2026563643}
