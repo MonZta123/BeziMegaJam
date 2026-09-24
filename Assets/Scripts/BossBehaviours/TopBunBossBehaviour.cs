@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Metadata;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -58,26 +56,14 @@ namespace BossBehaviours
             base.Awake();
 
             animator.SetBool(s_isGrounded, true);
-
-            _previousPosition = transform.position;
         }
-
-        private Vector3 _previousPosition;
-
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            Handles.Label(transform.position, $"Attack Count: {_shootingCount}");
-            Handles.Label(transform.position + Vector3.up * 0.5f, $"Mode: {_mode}");
-        }
-#endif
 
         private float _startedWaitingTime;
         private Vector3 _targetPosition;
 
         private void Update()
         {
-            animator.SetFloat("MoveSpeed", Vector3.Distance(_previousPosition, transform.position));
+            animator.SetFloat("MoveSpeed", agent.velocity.magnitude / agent.speed);
 
             if (_mode == TopBunBossMode.GetPath)
             {
@@ -146,8 +132,6 @@ namespace BossBehaviours
                 _mode = TopBunBossMode.GetPath;
                 _shootingCount = aoeAttackAmount;
             }
-
-            _previousPosition = transform.position;
         }
     }
 }
