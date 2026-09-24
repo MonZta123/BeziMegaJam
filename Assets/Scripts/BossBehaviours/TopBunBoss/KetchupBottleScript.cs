@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,25 +22,25 @@ public class KetchupBottleScript : MonoBehaviour
             rb = GetComponent<Rigidbody>();
     }
 
-    private void Awake()
+    private void Start()
     {
         var playerPos = Player.Instance.transform.position;
-        var target = new Vector3(playerPos.x, 0f, playerPos.z);
+        _target ??= new Vector3(playerPos.x, 0f, playerPos.z);
 
         var start = transform.position;
 
         var t = flightDuration;
         
         var horizontalTarget = new Vector3(
-            target.x,
+            _target.Value.x,
             start.y,
-            target.z
+            _target.Value.z
         );
 
         var horizontalVelocity = (horizontalTarget - start) / t;
 
         var verticalVelocity =
-            (target.y - start.y - 0.5f * Physics.gravity.y * t * t) / t;
+            (_target.Value.y - start.y - 0.5f * Physics.gravity.y * t * t) / t;
 
         var velocity = horizontalVelocity;
         velocity.y = verticalVelocity;
@@ -57,5 +56,12 @@ public class KetchupBottleScript : MonoBehaviour
         pos.y = 0;
         Instantiate(puddle, pos, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    private Vector3? _target;
+    
+    public void SetTarget(Vector3 pos)
+    {
+        _target = pos;
     }
 }

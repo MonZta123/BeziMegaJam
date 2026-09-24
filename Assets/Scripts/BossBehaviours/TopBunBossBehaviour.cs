@@ -24,10 +24,7 @@ namespace BossBehaviours
         private Animator animator;
 
         [SerializeField]
-        private GameObject spike;
-
-        [SerializeField]
-        private GameObject projectile;
+        private KetchupBottleScript projectile;
 
         [SerializeField]
         private float moveCooldown;
@@ -37,6 +34,9 @@ namespace BossBehaviours
 
         [SerializeField]
         private int aoeAttackAmount = 4;
+
+        [SerializeField]
+        private Vector3 ketchupShootRange = new(64.14f, 0f, -0.86f);
 
         private float _moveTimer;
 
@@ -111,17 +111,31 @@ namespace BossBehaviours
 
             if (_mode == TopBunBossMode.Shooting)
             {
-                var pos = Player.Instance.transform.position;
-                pos.y = transform.position.y;
-
-                transform.LookAt(pos);
                 _aoeAttackTimer += Time.deltaTime;
 
                 if (_aoeAttackTimer >= aoeAttackCooldown)
                 {
                     _shootingCount--;
                     // Do Attack attack
-                    Instantiate(projectile, transform.position + Vector3.up * 0.5f, transform.rotation);
+                    var projectileScript = Instantiate(projectile, transform.position + Vector3.up * 0.5f,
+                        transform.rotation);
+
+                    if (_shootingCount != 0)
+                    {
+                        var targetPos = ketchupShootRange + new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
+
+                        transform.LookAt(targetPos);
+
+                        projectileScript.SetTarget(targetPos);
+                    }
+                    else
+                    {
+                        var pos = Player.Instance.transform.position;
+                        pos.y = transform.position.y;
+
+                        transform.LookAt(pos);
+                    }
+
                     _aoeAttackTimer = 0;
                     animator.SetTrigger(s_attack);
                 }

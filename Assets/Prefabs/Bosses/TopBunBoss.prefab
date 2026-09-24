@@ -70,16 +70,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32520cce4af64be8a4cc8c91d525d929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBehaviours.TopBunBossBehaviour
-  health: 1
+  health: 10
   meshRenderer: {fileID: 9164876643480246984}
   flashMaterial: {fileID: 2100000, guid: 5d62557e6d825fb439aa29082a2c6a82, type: 2}
   reward: 0
   animator: {fileID: 2731050947982534356}
-  spike: {fileID: 0}
-  projectile: {fileID: 1130259846942659723, guid: 9478da0409c398e4d93ec4c0411d28ba, type: 3}
+  projectile: {fileID: 8578391049495452231, guid: 9478da0409c398e4d93ec4c0411d28ba, type: 3}
   moveCooldown: 0
   aoeAttackCooldown: 0.5
   aoeAttackAmount: 4
+  ketchupShootRange: {x: 50, y: 0, z: 3.4}
   agent: {fileID: 433969286674162034}
   movePositions:
   - {x: 51.83, y: 0, z: 7.12}

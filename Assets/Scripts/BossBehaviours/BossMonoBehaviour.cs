@@ -30,28 +30,45 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     public abstract void OnDeath();
 
+    public static BossMonoBehaviour Instance { get; private set; }
+
     protected virtual void Awake()
     {
-        HealthSystem.Instance.ShowBossHealth(health);
+        HealthSystem.Instance.ShowBossHealth(health, health);
         _deathSound = GetComponentInChildren<AudioSource>();
-        Debug.Log("Awake Wird gecalled");
 
         _materials = meshRenderer.sharedMaterials;
         _flashMaterials = new Material[_materials.Length];
 
         for (var i = 0; i < _flashMaterials.Length; i++)
             _flashMaterials[i] = flashMaterial;
+
+        Instance = this;
+        
+        _currentHealth = health;
+        _maxHealth = health;
     }
 
+    public virtual void AddHealth(int amount)
+    {
+        _currentHealth += amount;
+        _currentHealth = Mathf.Min(_currentHealth, _maxHealth);
+        
+        HealthSystem.Instance.ShowBossHealth(_currentHealth, _maxHealth);
+    }
+
+    private int _maxHealth;
+    private int _currentHealth;
+    
     public virtual void TakeDamage(int amount)
     {
         StartCoroutine(FlashDamage(0.1f));
-        health -= amount;
-        health = Mathf.Max(health, 0);
+        _currentHealth -= amount;
+        _currentHealth = Mathf.Max(_currentHealth, 0);
         
         HealthSystem.Instance.TakeDamageBoss(amount);
 
-        if (health <= 0)
+        if (_currentHealth <= 0)
         {
             _deathSound.Play();
             Player.Instance.GoBackToKitchen(gameObject);

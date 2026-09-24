@@ -68,8 +68,10 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     [SerializeField]
     private AudioSource dieAudio;
+
     [SerializeField]
     private AudioSource getHitAudio;
+
     [SerializeField]
     private AudioSource hitAudio;
 
@@ -112,9 +114,12 @@ public class Player : MonoBehaviour
 
     private int _health;
 
+    private int _maxHealth;
+
     public void SetHealth(int value)
     {
         _health = value;
+        _maxHealth = value;
         HealthSystem.Instance.SetCurrentHealthPlayer(value);
     }
 
@@ -122,13 +127,18 @@ public class Player : MonoBehaviour
     {
         _health -= value;
         _health = Math.Max(_health, 0);
-        
+
         HealthSystem.Instance.TakeDamagePlayer(value);
 
         if (_health <= 0)
         {
             dieAudio.Play();
-            EndScreenManager.Instance.ShowLoseScreen();
+            // EndScreenManager.Instance.ShowLoseScreen();
+            HealthSystem.Instance.SetCurrentHealthPlayer(_maxHealth);
+            Debug.Log(_maxHealth);
+            BossMonoBehaviour.Instance.AddHealth(_maxHealth);
+            
+            _health = _maxHealth;
             // get cooked
         }
         else

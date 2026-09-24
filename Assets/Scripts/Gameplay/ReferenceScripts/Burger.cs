@@ -27,7 +27,6 @@ namespace Gameplay.ReferenceScripts
 
         [SerializeField]
         private List<BurgerPartMatch> parts;
-        AudioSource _audioSource;
 
         public static Burger CurrentBurger { get; private set; }
         
@@ -57,7 +56,6 @@ namespace Gameplay.ReferenceScripts
         {
             _originalPosition = transform.position;
             _originalRotation = transform.rotation;
-            _audioSource = GetComponent<AudioSource>();
 
             CurrentBurger = this;
             
