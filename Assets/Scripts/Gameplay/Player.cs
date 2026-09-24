@@ -65,6 +65,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private SphereCollider trigger;
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource dieAudio;
+    [SerializeField]
+    private AudioSource getHitAudio;
+    [SerializeField]
+    private AudioSource hitAudio;
+
+
     public bool IsGrounded { get; private set; } = true;
 
     public Transform GetAttachmentPoint()
@@ -118,8 +127,13 @@ public class Player : MonoBehaviour
 
         if (_health <= 0)
         {
+            dieAudio.Play();
             EndScreenManager.Instance.ShowLoseScreen();
             // get cooked
+        }
+        else
+        {
+            getHitAudio.Play();
         }
     }
 
@@ -246,6 +260,7 @@ public class Player : MonoBehaviour
                     {
                         if (hitInfo.transform.gameObject.TryGetComponent<BossMonoBehaviour>(out var behaviour))
                         {
+                            hitAudio.Play();
                             behaviour.TakeDamage(1);
                         }
                     }

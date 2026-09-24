@@ -6,10 +6,16 @@ namespace Gameplay
     {
         [SerializeField]
         private AudioSource audioSource;
-        
+        private Player player;
+
+        private void Start()
+        {
+            player = GetComponentInParent<Player>();
+        }
         public void PlayFootstep()
         {
-            audioSource.Play();
+            if(player != null)
+                audioSource.Play();
         }
     }
 }

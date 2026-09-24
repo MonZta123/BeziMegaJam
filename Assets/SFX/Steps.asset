@@ -1,13 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8520680707083193113
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerFootstep1_{-8520680707083193113}
+  m_AudioClip: {fileID: 8300000, guid: c0d4871f47665b84dbee48d8566bb8d1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
 --- !u!1233149941 &-1077418831821153333
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Footstep1_{-1077418831821153333}
-  m_AudioClip: {fileID: 8300000, guid: 7de6a699d76a6434c89e2ce6b25661f5, type: 3}
+  m_Name: PlayFootstep4_{-1077418831821153333}
+  m_AudioClip: {fileID: 8300000, guid: edcb19ea28ce3234e9e8e818adad32e2, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1233149941 &840697275070100941
@@ -16,8 +26,8 @@ AudioContainerElement:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 422644__trullilulli__sfx-player-action-footstep_{840697275070100941}
-  m_AudioClip: {fileID: 8300000, guid: cde205695cd10fb4fbff1cd84915dae7, type: 3}
+  m_Name: PlayFootstep3_{840697275070100941}
+  m_AudioClip: {fileID: 8300000, guid: 06dd1cb7cc1362e4e8cffd559299a2a3, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1233149941 &1176009225424818971
@@ -26,8 +36,8 @@ AudioContainerElement:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 268758__deleted_user_5093904__footsteps_{1176009225424818971}
-  m_AudioClip: {fileID: 8300000, guid: 5b8e60d47ffc41b48b734931e3b543ef, type: 3}
+  m_Name: PlayFootstep2_{1176009225424818971}
+  m_AudioClip: {fileID: 8300000, guid: 97ee35e44ef244b46b90831a2efd7741, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
@@ -49,6 +59,7 @@ AudioRandomContainer:
   - {fileID: 1176009225424818971}
   - {fileID: 840697275070100941}
   - {fileID: -1077418831821153333}
+  - {fileID: -8520680707083193113}
   m_AvoidRepeatingLast: 0
   m_PlaybackMode: 1
   m_TriggerMode: 0

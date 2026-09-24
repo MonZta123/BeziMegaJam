@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Gameplay.ReferenceScripts;
 using UI;
@@ -20,7 +20,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     
     [SerializeField]
     private BurgerPart reward;
-
+    private AudioSource _deathSound;
     protected void OnDestroy()
     {
         HealthSystem.Instance.HideBossHealth();
@@ -33,7 +33,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     protected virtual void Awake()
     {
         HealthSystem.Instance.ShowBossHealth(health);
-        
+        _deathSound = GetComponentInChildren<AudioSource>();
         Debug.Log("Awake Wird gecalled");
 
         _materials = meshRenderer.sharedMaterials;
@@ -53,6 +53,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
         if (health <= 0)
         {
+            _deathSound.Play();
             Player.Instance.GoBackToKitchen(gameObject);
         }
 
