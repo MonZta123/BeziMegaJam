@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UI;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 [SelectionBase]
@@ -74,6 +75,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioSource hitAudio;
+
+    [SerializeField]
+    private AudioSource deliverAudio;
 
 
     public bool IsGrounded { get; private set; } = true;
@@ -213,12 +217,13 @@ public class Player : MonoBehaviour
             {
                 // Deliver Burger
                 OrderSystem.Instance.DeliverBurger(_carryingBurger);
-
+                deliverAudio.Play();
                 _deliveryInView.HideTooltip();
                 _deliveryInView = null;
             }
             else
             {
+                
                 _carryingBurger.Drop();
             }
 

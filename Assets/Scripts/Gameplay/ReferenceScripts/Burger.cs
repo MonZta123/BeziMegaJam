@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using UI;
 using UnityEngine;
 
@@ -28,6 +29,9 @@ namespace Gameplay.ReferenceScripts
         [SerializeField]
         private List<BurgerPartMatch> parts;
 
+        [SerializeField]
+        public bool debugFinishedBurger;
+
         public static Burger CurrentBurger { get; private set; }
         
         public (Vector3, Quaternion) GetOriginalPosition() => (_originalPosition, _originalRotation);
@@ -39,7 +43,10 @@ namespace Gameplay.ReferenceScripts
             var activeGameObjects = activeParts.ToList();
 
             var isFinished = ingredients.All(n => activeGameObjects.Contains(n));
-            
+
+            if(debugFinishedBurger)
+                isFinished = true;
+
             return isFinished;
         }
 
@@ -76,6 +83,7 @@ namespace Gameplay.ReferenceScripts
         {
             transform.parent = null;
             _carrier.SetModeNotCarrying();
+            
             transform.position = _originalPosition;
             transform.rotation = _originalRotation;
             _carrier = null;
@@ -96,7 +104,7 @@ namespace Gameplay.ReferenceScripts
         public void AddBurgerPart(BurgerPart part)
         {
             var partObj = parts.Find(x => x.part == part);
-            if (partObj == null)
+            if (partObj == null || !partObj.gameObject)
                 return;
 
             partObj.gameObject.SetActive(true);
