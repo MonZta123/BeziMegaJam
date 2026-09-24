@@ -150,7 +150,7 @@ AudioSource:
   m_GameObject: {fileID: 9150915804718182706}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7513610303796330460, guid: f39a36d26bb73324d8b5b300384652a5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c431c7b785b18cd4ea660e9487000c2c, type: 3}
   m_PlayOnAwake: 1
@@ -318,7 +318,7 @@ PrefabInstance:
       addedObject: {fileID: 2731050947982534356}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c788b9326ab1a4e4cb488a37230d2fee, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4892059734583089207}
+      addedObject: {fileID: 2660195416795707294}
   m_SourcePrefab: {fileID: 100100000, guid: c788b9326ab1a4e4cb488a37230d2fee, type: 3}
 --- !u!1 &8559994160606320806 stripped
 GameObject:
@@ -347,7 +347,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4892059734583089207
+--- !u!114 &2660195416795707294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
