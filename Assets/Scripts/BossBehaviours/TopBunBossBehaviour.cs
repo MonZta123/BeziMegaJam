@@ -98,6 +98,7 @@ namespace BossBehaviours
             if (_mode == TopBunBossMode.Shooting)
             {
                 _aoeAttackTimer += Time.deltaTime;
+                base._shootSound.Play();
 
                 if (_aoeAttackTimer >= aoeAttackCooldown)
                 {

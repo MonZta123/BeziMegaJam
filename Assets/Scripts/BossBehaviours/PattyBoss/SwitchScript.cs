@@ -12,6 +12,7 @@ namespace BossBehaviours.PattyBoss
         
         [SerializeField]
         private MeshRenderer meshRenderer;
+        private AudioSource _audioSource;
 
         public bool IsOn { get; private set; }
 
@@ -24,6 +25,7 @@ namespace BossBehaviours.PattyBoss
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             SwitchManager.Instance.RegisterSwitch(this);
         }
         
@@ -43,6 +45,7 @@ namespace BossBehaviours.PattyBoss
         
         public void OnTriggerEnter(Collider other)
         {
+            _audioSource.Play();
             if (_locked)
                 return;
             

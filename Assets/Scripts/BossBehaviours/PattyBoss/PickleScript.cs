@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BossBehaviours.PattyBoss
 {
@@ -7,6 +7,7 @@ namespace BossBehaviours.PattyBoss
     {
         [SerializeField]
         private Rigidbody rb;
+        private AudioSource _audioSource;
 
         private void OnValidate()
         {
@@ -16,7 +17,9 @@ namespace BossBehaviours.PattyBoss
 
         private void Awake()
         {
+            _audioSource = GetComponentInChildren<AudioSource>();
             rb.linearVelocity = transform.rotation * new Vector3(0, 0, 3f);
+            _audioSource.Play();
         }
 
         private void OnTriggerEnter(Collider other)

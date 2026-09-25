@@ -123,6 +123,7 @@ Transform:
   m_Children:
   - {fileID: 8258238021567810302}
   - {fileID: 7296730085398815992}
+  - {fileID: 7976362876546051494}
   - {fileID: 8420440755042924268}
   - {fileID: 466792149719466796}
   m_Father: {fileID: 0}
@@ -205,12 +206,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8264352305251954689}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8258238021567810302}
+  m_Father: {fileID: 5484398621959061690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7341917360469452661
 AudioSource:
@@ -221,7 +222,7 @@ AudioSource:
   m_GameObject: {fileID: 8264352305251954689}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7513610303796330460, guid: f39a36d26bb73324d8b5b300384652a5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c431c7b785b18cd4ea660e9487000c2c, type: 3}
   m_PlayOnAwake: 1
@@ -320,7 +321,7 @@ GameObject:
   - component: {fileID: 7296730085398815992}
   - component: {fileID: 2965896184566608752}
   m_Layer: 0
-  m_Name: AudioSource
+  m_Name: ShootAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +353,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7513610303796330460, guid: f39a36d26bb73324d8b5b300384652a5, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: c431c7b785b18cd4ea660e9487000c2c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 07a06b6bf8956014b928ed725bbbbb6f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -661,9 +662,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c788b9326ab1a4e4cb488a37230d2fee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7976362876546051494}
     - targetCorrespondingSourceObject: {fileID: -7587006271460570889, guid: c788b9326ab1a4e4cb488a37230d2fee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8536395826315681534}
