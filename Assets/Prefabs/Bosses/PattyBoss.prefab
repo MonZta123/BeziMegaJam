@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277934453371291098}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0.428, z: -0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7179889239859881442}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!33 &8406324263343448405
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -167,6 +167,8 @@ MonoBehaviour:
   meshRenderer: {fileID: 8082814537921548842}
   flashMaterial: {fileID: 2100000, guid: 5d62557e6d825fb439aa29082a2c6a82, type: 2}
   reward: 1
+  _deathSound: {fileID: 0}
+  _shootSound: {fileID: 0}
   animator: {fileID: 5523660010192650113}
   cannon: {fileID: -8971677745052203009, guid: 5c7c69bca26337540b22791a5cae56fb, type: 3}
   cannonPositions:

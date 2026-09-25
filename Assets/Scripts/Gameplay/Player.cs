@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
 
     [Header("Balancing")]
     [SerializeField]
+    private float attackReadDistance;
+    [SerializeField]
     private float attackCooldown = 0.5f;
 
     [SerializeField]
@@ -268,6 +270,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * 1.5f, transform.forward * 1.5f, Color.red);
     }
 #endif
+    
 
     public void Update()
     {
@@ -285,7 +288,7 @@ public class Player : MonoBehaviour
                     _timeLastAttack = Time.timeSinceLevelLoad;
                     animator.SetTrigger(s_attack);
                     if (Physics.Raycast(transform.position + Vector3.up * 1.5f, transform.forward, out var hitInfo,
-                            1.5f,
+                            attackReadDistance,
                             attackMask))
                     {
                         if (hitInfo.transform.gameObject.TryGetComponent<BossMonoBehaviour>(out var behaviour))

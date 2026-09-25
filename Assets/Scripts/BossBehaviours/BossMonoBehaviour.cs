@@ -20,9 +20,9 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     
     [SerializeField]
     private BurgerPart reward;
-    [HideInInspector]
+    [SerializeField]
     public AudioSource _deathSound;
-    [HideInInspector]
+    [SerializeField]
     public AudioSource _shootSound;
     public bool IsDead { get; private set; }
 
@@ -40,21 +40,10 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     public abstract void OnDeath();
 
     public static BossMonoBehaviour Instance { get; private set; }
-    private void AssignAudioSources()
-    {
-        foreach(var audioSource in GetComponentsInChildren<AudioSource>())
-        {
-            if (audioSource.clip.name == "DieAudio")
-                _deathSound = audioSource;
-            else if (audioSource.clip.name == "ShootAudio")
-                _shootSound = audioSource;
-        }
-    }
 
     protected virtual void Awake()
     {
         HealthSystem.Instance.ShowBossHealth(health, health);
-        AssignAudioSources();
 
         _materials = meshRenderer.sharedMaterials;
         _flashMaterials = new Material[_materials.Length];
