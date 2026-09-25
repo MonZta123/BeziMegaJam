@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using BossBehaviours;
 using Gameplay;
 using Gameplay.ReferenceScripts;
 using UnityEngine;
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
     [Header("Balancing")]
     [SerializeField]
     private float attackReadDistance;
+
     [SerializeField]
     private float attackCooldown = 0.5f;
 
@@ -125,9 +127,9 @@ public class Player : MonoBehaviour
     {
         _checkpointPosition = position;
     }
-    
+
     private Vector3 _checkpointPosition;
-    
+
     public void SetHealth(int value)
     {
         _health = value;
@@ -148,17 +150,17 @@ public class Player : MonoBehaviour
             // EndScreenManager.Instance.ShowLoseScreen();
             HealthSystem.Instance.SetCurrentHealthPlayer(_maxHealth);
             LockControls(true);
-            
-            
+
+
             HUD.Instance.FadeOut(0.5f, () =>
             {
                 transform.position = _checkpointPosition;
-                
+
                 LockControls(false);
                 BossMonoBehaviour.Instance.AddHealth(_maxHealth);
                 HUD.Instance.FadeIn(0.5f);
             });
-            
+
             _health = _maxHealth;
             // get cooked
         }
@@ -225,7 +227,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                
                 _carryingBurger.Drop();
             }
 
@@ -270,8 +271,10 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * 1.5f, transform.forward * 1.5f, Color.red);
     }
 #endif
-    
 
+
+    private readonly Collider[] _results = new Collider[50];
+    
     public void Update()
     {
         if (!_playerInput || _pauseMenuManager.PauseIsActive)
@@ -287,16 +290,19 @@ public class Player : MonoBehaviour
                 {
                     _timeLastAttack = Time.timeSinceLevelLoad;
                     animator.SetTrigger(s_attack);
-                    if (Physics.Raycast(transform.position + Vector3.up * 1.5f, transform.forward, out var hitInfo,
-                            attackReadDistance,
-                            attackMask))
+                    
+                    // if (Physics.SphereCast(transform.position + Vector3.up * 1.5f, 1.5f,  out var hitInfo, attackMask ))
+
+                    var size = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * 1.302f + transform.forward * 0.5f, 0.5f, _results, attackMask);
+
+                    for (var i = 0; i < size; i++)
                     {
-                        if (hitInfo.transform.gameObject.TryGetComponent<BossMonoBehaviour>(out var behaviour))
+                        if (_results[i].transform.gameObject.TryGetComponent<TopBunBossBehaviour>(out var behaviour))
                         {
                             hitAudio.Play();
                             behaviour.TakeDamage(1);
                         }
-                    }
+                    } 
                 }
             }
 

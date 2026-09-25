@@ -5913,6 +5913,10 @@ PrefabInstance:
       propertyPath: attackMask.m_Bits
       value: 247
       objectReference: {fileID: 0}
+    - target: {fileID: 3842764703019259840, guid: 9ed14b110e905bb4e8a8467ba93fd0e4, type: 3}
+      propertyPath: attackReadDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4968581152219611136, guid: 9ed14b110e905bb4e8a8467ba93fd0e4, type: 3}
       propertyPath: audioSource
       value: 

@@ -14,10 +14,6 @@ namespace BossBehaviours
         private static readonly int s_isGrounded = Animator.StringToHash("IsGrounded");
         private static readonly int s_attack = Animator.StringToHash("Attack");
 
-        public override void OnDeath()
-        {
-        }
-
         [SerializeField]
         private Animator animator;
 
@@ -98,7 +94,7 @@ namespace BossBehaviours
             if (_mode == TopBunBossMode.Shooting)
             {
                 _aoeAttackTimer += Time.deltaTime;
-                base._shootSound.Play();
+                base.shootSound.Play();
 
                 if (_aoeAttackTimer >= aoeAttackCooldown)
                 {

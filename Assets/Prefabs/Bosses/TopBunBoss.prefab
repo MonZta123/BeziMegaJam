@@ -74,8 +74,8 @@ MonoBehaviour:
   meshRenderer: {fileID: 9164876643480246984}
   flashMaterial: {fileID: 2100000, guid: 5d62557e6d825fb439aa29082a2c6a82, type: 2}
   reward: 0
-  _deathSound: {fileID: 7582162953385675063}
-  _shootSound: {fileID: 2473498802073758398}
+  deathSound: {fileID: 7582162953385675063}
+  shootSound: {fileID: 2473498802073758398}
   animator: {fileID: 2731050947982534356}
   projectile: {fileID: 8578391049495452231, guid: 9478da0409c398e4d93ec4c0411d28ba, type: 3}
   moveCooldown: 0

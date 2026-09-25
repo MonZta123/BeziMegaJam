@@ -22,10 +22,6 @@ public class PattyBossBehaviour : BossMonoBehaviour
     private List<Vector3> _cannonPositions;
     private List<Quaternion> _cannonRotations;
 
-    public override void OnDeath()
-    {
-    }
-
     protected override void Awake()
     {
         base.Awake();
@@ -40,17 +36,20 @@ public class PattyBossBehaviour : BossMonoBehaviour
 
     public override void TakeDamage(int amount)
     {
-        var index = Random.Range(0, _cannonPositions.Count - 1);
+        if (_cannonPositions.Count > 0)
+        {
+            var index = Random.Range(0, _cannonPositions.Count - 1);
 
-        var position = _cannonPositions[index];
+            var position = _cannonPositions[index];
 
-        _cannonPositions.RemoveAt(index);
+            _cannonPositions.RemoveAt(index);
 
-        var rotation = _cannonRotations[index];
-        _cannonRotations.RemoveAt(index);
+            var rotation = _cannonRotations[index];
+            _cannonRotations.RemoveAt(index);
 
-        Instantiate(cannon, position, rotation);
-        
+            Instantiate(cannon, position, rotation);
+        }
+
         base.TakeDamage(amount);
     }
 

@@ -17,27 +17,28 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     private Material[] _materials;
     private Material[] _flashMaterials;
-    
+
     [SerializeField]
     private BurgerPart reward;
+
     [SerializeField]
-    public AudioSource _deathSound;
+    public AudioSource deathSound;
+
     [SerializeField]
-    public AudioSource _shootSound;
+    public AudioSource shootSound;
+
     public bool IsDead { get; private set; }
 
-    protected void OnDestroy()
+    public virtual void OnDeath()
     {
         HealthSystem.Instance.HideBossHealth();
-
-        IsDead = true;
         
+        IsDead = true;
+
         Burger currentBurger = Burger.CurrentBurger;
         if (currentBurger)
             currentBurger.AddBurgerPart(reward);
     }
-
-    public abstract void OnDeath();
 
     public static BossMonoBehaviour Instance { get; private set; }
 
@@ -52,7 +53,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
             _flashMaterials[i] = flashMaterial;
 
         Instance = this;
-        
+
         _currentHealth = health;
         _maxHealth = health;
     }
@@ -61,24 +62,25 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     {
         _currentHealth += amount;
         _currentHealth = Mathf.Min(_currentHealth, _maxHealth);
-        
+
         HealthSystem.Instance.ShowBossHealth(_currentHealth, _maxHealth);
     }
 
     private int _maxHealth;
     private int _currentHealth;
-    
+
     public virtual void TakeDamage(int amount)
     {
         StartCoroutine(FlashDamage(0.1f));
         _currentHealth -= amount;
         _currentHealth = Mathf.Max(_currentHealth, 0);
-        
+
         HealthSystem.Instance.TakeDamageBoss(amount);
 
         if (_currentHealth <= 0)
         {
-            _deathSound.Play();
+            deathSound.Play();
+            OnDeath();
             Player.Instance.GoBackToKitchen(gameObject);
         }
 
