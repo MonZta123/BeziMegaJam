@@ -1,4 +1,4 @@
-using UI;
+﻿using UI;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -31,6 +31,8 @@ public class PauseMenuManager : MonoBehaviour
 
     [SerializeField]
     private AudioMixer audioMixer;
+    [SerializeField]
+    private AudioSource audioSource;
 
     public bool PauseIsActive => pauseMenuPanel.activeSelf;
 
@@ -49,9 +51,14 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
     }
+    private void PlayAudioButton()
+    {
+        audioSource.Play();
+    }
 
     public void ContinueGame()
     {
+        PlayAudioButton();
         blocker.SetActive(false);
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
@@ -59,6 +66,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void SettingsClicked()
     {
+        PlayAudioButton();
         pauseMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
 
@@ -96,6 +104,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ConfirmSettingsClicked()
     {
+        PlayAudioButton();
         pauseMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
 
@@ -110,6 +119,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void CancelSettingsClicked()
     {
+        PlayAudioButton();
         pauseMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
 
@@ -126,18 +136,21 @@ public class PauseMenuManager : MonoBehaviour
 
     public void QuitClicked()
     {
+        PlayAudioButton();
         pauseMenuPanel.SetActive(false);
         confirmQuitPanel.SetActive(true);
     }
 
     public void ConfirmQuitClicked()
     {
+        PlayAudioButton();
         Time.timeScale = 1f;
         HUD.Instance.FadeOut(0.5f, () => SceneManager.LoadScene("MainMenu"));
     }
 
     public void CancelQuitClicked()
     {
+        PlayAudioButton();
         pauseMenuPanel.SetActive(true);
         confirmQuitPanel.SetActive(false);
     }

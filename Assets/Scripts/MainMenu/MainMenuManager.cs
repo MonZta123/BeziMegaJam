@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -49,12 +49,19 @@ namespace MainMenu
 
         [SerializeField]
         private AudioMixer audioMixer;
+        [SerializeField]
+        private bool setSplashScreenActive = true;
+        [SerializeField]
+        private AudioSource audioSource;
 
         private void Start()
         {
             if (!InputDeviceManager.Instance.PlayerInput)
             {
-                splashScreen.SetActive(true);
+                if (setSplashScreenActive)
+                {
+                    splashScreen.SetActive(true);
+                }
                 InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
             }
             else
@@ -66,8 +73,21 @@ namespace MainMenu
         private void OnPlayerJoined()
         {
             InputDeviceManager.Instance.playerJoined.RemoveListener(OnPlayerJoined);
-            splashScreen.SetActive(false);
+            if (setSplashScreenActive)
+            {
+                splashScreen.SetActive(false);
+            }
             mainMenuPanel.SetActive(true);
+        }
+
+        private void PlayAudioButton()
+        {
+            if (audioSource != null)
+            {
+                print("Playing audio button sound");
+                audioSource.Play();
+            }
+
         }
 
         public void StartGameClicked()
@@ -77,6 +97,7 @@ namespace MainMenu
 
         public void SettingsClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(true);
             settingsPanel.SetActive(true);
 
@@ -96,6 +117,7 @@ namespace MainMenu
 
         public void CreditsClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(true);
             creditsPanel.SetActive(true);
 
@@ -365,6 +387,7 @@ namespace MainMenu
 
         public void QuitClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(true);
             confirmQuitPanel.SetActive(true);
         }
@@ -376,16 +399,19 @@ namespace MainMenu
 #else
             Application.Quit();
 #endif
+            PlayAudioButton();
         }
 
         public void CancelQuitClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(false);
             confirmQuitPanel.SetActive(false);
         }
 
         public void CloseCreditsClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(false);
             creditsPanel.SetActive(false);
         }
@@ -414,6 +440,7 @@ namespace MainMenu
 
         public void ConfirmSettingsClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(false);
             settingsPanel.SetActive(false);
 
@@ -428,6 +455,7 @@ namespace MainMenu
 
         public void CancelSettingsClicked()
         {
+            PlayAudioButton();
             blocker.SetActive(false);
             settingsPanel.SetActive(false);
 
