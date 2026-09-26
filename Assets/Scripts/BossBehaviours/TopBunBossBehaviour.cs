@@ -13,6 +13,7 @@ namespace BossBehaviours
     {
         private static readonly int s_isGrounded = Animator.StringToHash("IsGrounded");
         private static readonly int s_attack = Animator.StringToHash("Attack");
+        private static readonly int s_moveSpeed = Animator.StringToHash("MoveSpeed");
 
         [SerializeField]
         private Animator animator;
@@ -59,7 +60,7 @@ namespace BossBehaviours
 
         private void Update()
         {
-            animator.SetFloat("MoveSpeed", agent.velocity.magnitude / agent.speed);
+            animator.SetFloat(s_moveSpeed, agent.velocity.magnitude / agent.speed);
 
             if (_mode == TopBunBossMode.GetPath)
             {
@@ -100,7 +101,7 @@ namespace BossBehaviours
                 {
                     _shootingCount--;
                     // Do Attack attack
-                    var projectileScript = Instantiate(projectile, transform.position + Vector3.up * 0.5f,
+                    var projectileScript = Instantiate(projectile, transform.position + Vector3.up * 1.5f,
                         transform.rotation);
 
                     if (_shootingCount != 0)

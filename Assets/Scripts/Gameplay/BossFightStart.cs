@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UI;
 using UnityEngine;
-using Unity.Cinemachine;
 using MoreMountains.Feedbacks;
 
 
@@ -16,7 +15,7 @@ public class BossFightStart : MonoBehaviour
     private GameObject boss;
 
     [SerializeField]
-    private GameObject bossPosition;
+    private Transform bossPosition;
 
     [SerializeField]
     private string tooltipText = "Press E to start the fight!";

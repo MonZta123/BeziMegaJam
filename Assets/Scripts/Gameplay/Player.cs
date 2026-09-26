@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using BossBehaviours;
+using BossBehaviours.BottomBunBoss;
 using Gameplay;
 using Gameplay.ReferenceScripts;
 using UnityEngine;
@@ -292,7 +293,7 @@ public class Player : MonoBehaviour
                     animator.SetTrigger(s_attack);
                     
                     // if (Physics.SphereCast(transform.position + Vector3.up * 1.5f, 1.5f,  out var hitInfo, attackMask ))
-
+                    
                     var size = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * 1.302f + transform.forward * 0.5f, 0.5f, _results, attackMask);
 
                     for (var i = 0; i < size; i++)
@@ -301,6 +302,18 @@ public class Player : MonoBehaviour
                         {
                             hitAudio.Play();
                             behaviour.TakeDamage(1);
+                        }
+
+                        var ball = BallManager.Instance.CurrentBall;
+
+                        if (ball && ball == _results[i].gameObject)
+                        {
+                         var attackDirection = ball.transform.position - transform.position;
+
+                         attackDirection.y = 0;
+
+                         var rb = ball.GetComponent<Rigidbody>();
+                         rb.AddForce(attackDirection * 10f, ForceMode.Impulse); 
                         }
                     } 
                 }

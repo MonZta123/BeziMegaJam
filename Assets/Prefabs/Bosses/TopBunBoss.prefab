@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6801505444244112018}
   - component: {fileID: -5926979668334927559}
   - component: {fileID: 433969286674162034}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TopBunBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
