@@ -15316,6 +15316,7 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 749153684}
   sfxVolumeSlider: {fileID: 342893917}
   audioMixer: {fileID: 24100000, guid: f39a36d26bb73324d8b5b300384652a5, type: 2}
+  audioSource: {fileID: 0}
 --- !u!1001 &1235101158
 PrefabInstance:
   m_ObjectHideFlags: 0
