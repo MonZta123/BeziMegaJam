@@ -24,7 +24,9 @@ namespace MainMenu
         [SerializeField]
         private GameObject creditsPanel;
 
-        private const string CreditsCsvUrl = "https://docs.google.com/spreadsheets/d/1Rd0XkZEmcesZnthSxBUQRH42q8Mh-5LB_aMuqAepXg8/export?format=csv";
+        private const string CreditsCsvUrl =
+            "https://docs.google.com/spreadsheets/d/1Rd0XkZEmcesZnthSxBUQRH42q8Mh-5LB_aMuqAepXg8/export?format=csv";
+
         private const int CreditsRequestTimeoutSeconds = 15;
 
         private Coroutine _creditsFetchRoutine;
@@ -49,8 +51,10 @@ namespace MainMenu
 
         [SerializeField]
         private AudioMixer audioMixer;
+
         [SerializeField]
         private bool setSplashScreenActive = true;
+
         [SerializeField]
         private AudioSource audioSource;
 
@@ -62,6 +66,7 @@ namespace MainMenu
                 {
                     splashScreen.SetActive(true);
                 }
+
                 InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
             }
             else
@@ -77,6 +82,7 @@ namespace MainMenu
             {
                 splashScreen.SetActive(false);
             }
+
             mainMenuPanel.SetActive(true);
         }
 
@@ -87,7 +93,6 @@ namespace MainMenu
                 print("Playing audio button sound");
                 audioSource.Play();
             }
-
         }
 
         public void StartGameClicked()
@@ -171,7 +176,8 @@ namespace MainMenu
                 catch (FormatException exception)
                 {
                     Debug.LogWarning($"Unable to parse the credits sheet: {exception.Message}");
-                    creditsText.text = "Credits couldn't be read. Check the sheet's Section, Name, Contribution, and Link columns.";
+                    creditsText.text =
+                        "Credits couldn't be read. Check the sheet's Section, Name, Contribution, and Link columns.";
                 }
             }
 
@@ -359,6 +365,7 @@ namespace MainMenu
                     {
                         rows.Add(row);
                     }
+
                     row = new List<string>();
                     if (character == '\r' && index + 1 < csv.Length && csv[index + 1] == '\n')
                     {
