@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gameplay;
+using UnityEngine;
 
 namespace BossBehaviours.PattyBoss
 {
@@ -21,6 +22,11 @@ namespace BossBehaviours.PattyBoss
 
         private void Update()
         {
+            if (OrderSystem.Instance.HasLost)
+            {
+                return;
+            }
+            
             if (!_startShooting)
             {
                 transform.position += new Vector3(0, 2.5f * Time.deltaTime, 0);

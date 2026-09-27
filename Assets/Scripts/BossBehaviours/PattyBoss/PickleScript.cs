@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gameplay;
+using UnityEngine;
 
 namespace BossBehaviours.PattyBoss
 {
@@ -7,6 +8,7 @@ namespace BossBehaviours.PattyBoss
     {
         [SerializeField]
         private Rigidbody rb;
+
         private AudioSource _audioSource;
 
         private void OnValidate()
@@ -24,11 +26,18 @@ namespace BossBehaviours.PattyBoss
 
         private void OnTriggerEnter(Collider other)
         {
+            if (OrderSystem.Instance.HasLost)
+            {
+                rb.isKinematic = true;
+                rb.linearVelocity = Vector3.zero;
+                return;
+            }
+
             if (other.gameObject.TryGetComponent<Player>(out var player))
             {
                 player.TakeDamage(1);
             }
-            
+
             Destroy(gameObject);
         }
     }

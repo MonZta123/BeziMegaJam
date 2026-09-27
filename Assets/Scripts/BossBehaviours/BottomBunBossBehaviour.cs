@@ -1,4 +1,5 @@
 ﻿using BossBehaviours.BottomBunBoss;
+using Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -41,6 +42,17 @@ namespace BossBehaviours
         {
             var ball = BallManager.Instance.CurrentBall;
 
+            if (OrderSystem.Instance.HasLost)
+            {
+                if (ball)
+                    ball.GetComponent<Rigidbody>().isKinematic = true;
+
+                animator.SetBool(s_isGrounded, true);
+                animator.SetFloat(s_moveSpeed, 0);
+                agent.ResetPath();
+                return;
+            }
+
             if (!ball)
                 return;
 
@@ -70,7 +82,7 @@ namespace BossBehaviours
             else if (agent.remainingDistance < 0.1f)
             {
                 transform.LookAt(ballPosition);
-            
+
                 agent.ResetPath();
             }
         }

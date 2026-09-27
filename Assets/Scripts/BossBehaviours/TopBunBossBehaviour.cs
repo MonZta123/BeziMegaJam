@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -60,6 +61,14 @@ namespace BossBehaviours
 
         private void Update()
         {
+            if (OrderSystem.Instance.HasLost)
+            { 
+                animator.SetBool(s_isGrounded, true);
+                animator.SetFloat(s_moveSpeed, 0);
+                agent.ResetPath();
+                return;
+            }
+            
             animator.SetFloat(s_moveSpeed, agent.velocity.magnitude / agent.speed);
 
             if (_mode == TopBunBossMode.GetPath)

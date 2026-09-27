@@ -140,6 +140,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int value)
     {
+        if (OrderSystem.Instance.HasLost)
+        {
+            return;
+        }
+
         _health -= value;
         _health = Math.Max(_health, 0);
 
@@ -202,7 +207,7 @@ public class Player : MonoBehaviour
 
     private void OnJumping(InputAction.CallbackContext ctx)
     {
-        _jump = true;
+        // _jump = true;
     }
 
     private bool _controlsLocked;
@@ -275,7 +280,7 @@ public class Player : MonoBehaviour
 
 
     private readonly Collider[] _results = new Collider[50];
-    
+
     public void Update()
     {
         if (!_playerInput || _pauseMenuManager.PauseIsActive)
@@ -291,10 +296,12 @@ public class Player : MonoBehaviour
                 {
                     _timeLastAttack = Time.timeSinceLevelLoad;
                     animator.SetTrigger(s_attack);
-                    
+
                     // if (Physics.SphereCast(transform.position + Vector3.up * 1.5f, 1.5f,  out var hitInfo, attackMask ))
-                    
-                    var size = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * 1.302f + transform.forward * 0.5f, 0.5f, _results, attackMask);
+
+                    var size = Physics.OverlapSphereNonAlloc(
+                        transform.position + Vector3.up * 1.302f + transform.forward * 0.5f, 0.5f, _results,
+                        attackMask);
 
                     for (var i = 0; i < size; i++)
                     {
@@ -308,14 +315,14 @@ public class Player : MonoBehaviour
 
                         if (ball && ball == _results[i].gameObject)
                         {
-                         var attackDirection = ball.transform.position - transform.position;
+                            var attackDirection = ball.transform.position - transform.position;
 
-                         attackDirection.y = 0;
+                            attackDirection.y = 0;
 
-                         var rb = ball.GetComponent<Rigidbody>();
-                         rb.AddForce(attackDirection * 10f, ForceMode.Impulse); 
+                            var rb = ball.GetComponent<Rigidbody>();
+                            rb.AddForce(attackDirection * 10f, ForceMode.Impulse);
                         }
-                    } 
+                    }
                 }
             }
 

@@ -104,11 +104,11 @@ namespace Gameplay
             });
         }
 
-        private bool _hasLost;
+        public bool HasLost { get; private set; }
 
         private void Update()
         {
-            if (_hasLost) return;
+            if (HasLost) return;
 
             _timer += Time.deltaTime;
 
@@ -150,11 +150,11 @@ namespace Gameplay
 
         private void Dead()
         {
-            _hasLost = true;
+            HasLost = true;
             
             Player.Instance.LockControls(true);
             
-            // ShowUI
+            EndScreenManager.Instance.ShowLoseScreen();
         }
 
         private void Win()
