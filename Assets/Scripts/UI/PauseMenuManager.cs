@@ -47,6 +47,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ShowPauseMenu()
     {
+        print("openingpausemenu");
         blocker.SetActive(true);
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
