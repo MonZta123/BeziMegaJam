@@ -984,7 +984,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2415,7 +2415,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3296,7 +3296,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Are you sure you want to quit the game?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 17cbb1e0050dd6e4e9a89f1f14605384, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3363,7 +3363,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1124427246
@@ -4295,7 +4295,7 @@ RectTransform:
   m_Father: {fileID: 218889006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4929,7 +4929,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -5312,7 +5312,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1543335498}
   m_HandleRect: {fileID: 1543335497}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5539,7 +5539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6206,7 +6206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 66.1, y: 232.9}
+  m_AnchoredPosition: {x: 55.9, y: 314.6}
   m_SizeDelta: {x: 200, y: 58.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095416106
@@ -6377,7 +6377,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -6570,7 +6570,19 @@ PrefabInstance:
       objectReference: {fileID: 2701348840572511137, guid: 17cbb1e0050dd6e4e9a89f1f14605384, type: 2}
     - target: {fileID: 4313805176797620769, guid: 125f535092012064394a617c063791a5, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313805176797620769, guid: 125f535092012064394a617c063791a5, type: 3}
+      propertyPath: m_fontSharedMaterials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313805176797620769, guid: 125f535092012064394a617c063791a5, type: 3}
+      propertyPath: 'm_fontSharedMaterials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2701348840572511137, guid: 17cbb1e0050dd6e4e9a89f1f14605384, type: 2}
+    - target: {fileID: 5268868488826114711, guid: 125f535092012064394a617c063791a5, type: 3}
+      propertyPath: m_Color.a
+      value: 0.019607844
       objectReference: {fileID: 0}
     - target: {fileID: 5362752676670456856, guid: 125f535092012064394a617c063791a5, type: 3}
       propertyPath: m_Name
@@ -6656,6 +6668,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2701348840572511137, guid: 17cbb1e0050dd6e4e9a89f1f14605384, type: 2}
+    - target: {fileID: 6830120926438751639, guid: 125f535092012064394a617c063791a5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6830120926438751639, guid: 125f535092012064394a617c063791a5, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1

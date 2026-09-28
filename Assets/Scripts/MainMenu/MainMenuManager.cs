@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -24,12 +22,48 @@ namespace MainMenu
         [SerializeField]
         private GameObject creditsPanel;
 
-        private const string CreditsCsvUrl =
-            "https://docs.google.com/spreadsheets/d/1Rd0XkZEmcesZnthSxBUQRH42q8Mh-5LB_aMuqAepXg8/export?format=csv";
+        private static readonly CreditEntry[] BundledCredits =
+        {
+            new CreditEntry("Design", "Jesse", "Design/Production/Asset Research", "https://jessemauritz1.wixsite.com/website"),
+            new CreditEntry("Art", "Cris", "Enviornment/Prop Artist", "https://crisrvs.artstation.com/"),
+            new CreditEntry("Developer", "TJ", "Coding/Mechanics", "tj-codez.itch.io"),
+            new CreditEntry("Art", "GraphicSauce", "UI Font", "https://www.1001fonts.com/sketch-chalk-font.html"),
+            new CreditEntry("Art", "Stylized Core By Z", "Character", "https://assetstore.unity.com/packages/3d/characters/humanoids/stylized-player-character-free-371506"),
+            new CreditEntry("Sound", "Sadiquecat", "enemy fire1", "https://freesound.org/people/Sadiquecat/sounds/784041/"),
+            new CreditEntry("Art", "etman", "pickle turret", "https://sketchfab.com/3d-models/pickles-4b8c7e8412fb409285528e79b70d1891"),
+            new CreditEntry("Sound", "rayray_cruze", "Pickup Sound", "https://freesound.org/people/rayray_cruze/sounds/734296/"),
+            new CreditEntry("Sound", "Joao_Janz", "Player Hit Target", "https://freesound.org/people/Joao_Janz/sounds/485279/"),
+            new CreditEntry("Sound", "Under7Dude", "Enemy Hit Player", "https://freesound.org/people/Under7dude/sounds/163441/"),
+            new CreditEntry("Sound", "mickey13", "Enemy Die", "https://freesound.org/people/mrickey13/sounds/515620/"),
+            new CreditEntry("Sound", "F.M. Audio", "Player Die", "https://freesound.org/people/F.M.Audio/sounds/695386/"),
+            new CreditEntry("Sound", "Catch22Music", "Music", "https://pixabay.com/users/catch22music-43977658/"),
+            new CreditEntry("Sound", "SonicSoundFX", "Ambient Noise Kitchen", "https://www.zapsplat.com/author/sonic-soundfx/?_gl=1*1hghjf2*_up*MQ..*_gs*MQ..&gclid=Cj0KCQjwlNPVBhCMARIsAPZ5Rqj3GwqvuO1nto0YiWleRVW7mOmv8yBx6zTfQAwaPSzWWIRDQPma3FMaAumMEALw_wcB"),
+            new CreditEntry("Sound", "Kenneth_Cooney", "Deliver Burger", "https://freesound.org/people/Kenneth_Cooney/sounds/609335/"),
+            new CreditEntry("Sound", "B_Sean", "Fight Music", "https://freesound.org/people/B_Sean/sounds/421886/"),
+            new CreditEntry("Sound", "LukeUPF", "Turret Raise", "https://freesound.org/people/LukeUPF/sounds/233058/"),
+            new CreditEntry("Sound", "Breviceps", "Pickle Shot", "https://freesound.org/people/Breviceps/sounds/445109/"),
+            new CreditEntry("Sound", "EtherAudi", "SwitchClick", "https://freesound.org/people/EtherAudio/sounds/825502/"),
+            new CreditEntry("Sound", "Airstream", "MenuMusic", "https://uppbeat.io/c/airstream"),
+            new CreditEntry("Sound", "Artninja", "Explode", "https://freesound.org/people/Artninja/sounds/786111/"),
+            new CreditEntry("HUD", "Stockio", "UI health", "https://www.flaticon.com/free-icons/burger"),
+            new CreditEntry("HUD", "Knokapp", "Boss Health", "https://www.flaticon.com/free-icon/plate_2848763?term=diner&page=1&position=56&origin=search&related_id=2848763")
+        };
 
-        private const int CreditsRequestTimeoutSeconds = 15;
+        private readonly struct CreditEntry
+        {
+            public readonly string Section;
+            public readonly string Name;
+            public readonly string Contribution;
+            public readonly string Link;
 
-        private Coroutine _creditsFetchRoutine;
+            public CreditEntry(string section, string name, string contribution, string link)
+            {
+                Section = section;
+                Name = name;
+                Contribution = contribution;
+                Link = link;
+            }
+        }
 
         [SerializeField]
         private GameObject confirmQuitPanel;
@@ -126,22 +160,11 @@ namespace MainMenu
             blocker.SetActive(true);
             creditsPanel.SetActive(true);
 
-            if (_creditsFetchRoutine != null)
-            {
-                StopCoroutine(_creditsFetchRoutine);
-            }
-
-            _creditsFetchRoutine = StartCoroutine(LoadCreditsFromGoogleSheet());
-        }
-
-        private IEnumerator LoadCreditsFromGoogleSheet()
-        {
             var creditsText = FindCreditsText(creditsPanel.transform);
             if (creditsText == null)
             {
                 Debug.LogError("CreditsPanel needs a child named CreditsText with a TextMeshPro text component.");
-                _creditsFetchRoutine = null;
-                yield break;
+                return;
             }
 
             var linkHandler = creditsText.GetComponent<CreditsLinkHandler>();
@@ -150,39 +173,12 @@ namespace MainMenu
                 linkHandler = creditsText.gameObject.AddComponent<CreditsLinkHandler>();
             }
 
-            linkHandler.SetLinkTargets(new List<string>());
-            creditsText.text = "Loading credits...";
-
-            using (var request = UnityWebRequest.Get(CreditsCsvUrl))
-            {
-                request.timeout = CreditsRequestTimeoutSeconds;
-                yield return request.SendWebRequest();
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogWarning($"Unable to load credits from Google Sheets: {request.error}");
-                    creditsText.text = "Credits couldn't be loaded. Check your connection and try again.";
-                    _creditsFetchRoutine = null;
-                    yield break;
-                }
-
-                try
-                {
-                    var linkTargets = new List<string>();
-                    var formattedCredits = FormatCredits(ParseCsv(request.downloadHandler.text), linkTargets);
-                    linkHandler.SetLinkTargets(linkTargets);
-                    creditsText.text = formattedCredits;
-                }
-                catch (FormatException exception)
-                {
-                    Debug.LogWarning($"Unable to parse the credits sheet: {exception.Message}");
-                    creditsText.text =
-                        "Credits couldn't be read. Check the sheet's Section, Name, Contribution, and Link columns.";
-                }
-            }
-
-            _creditsFetchRoutine = null;
+            var linkTargets = new List<string>();
+            creditsText.text = FormatBundledCredits(linkTargets);
+            linkHandler.SetLinkTargets(linkTargets);
         }
+
+
 
         private static TMP_Text FindCreditsText(Transform root)
         {
@@ -198,118 +194,75 @@ namespace MainMenu
             return null;
         }
 
-        private static string FormatCredits(List<List<string>> rows, List<string> linkTargets)
+        private static string FormatBundledCredits(List<string> linkTargets)
         {
-            linkTargets.Clear();
-
-            if (rows.Count == 0)
-            {
-                return "No credits are listed in the sheet yet.";
-            }
-
-            var header = rows[0];
-            var sectionColumn = FindColumn(header, "Section");
-            var nameColumn = FindColumn(header, "Name");
-            var contributionColumn = FindColumn(header, "Contribution");
-            var linkColumn = FindColumn(header, "Link");
-            var linkTextColumn = FindColumn(header, "Link Text");
-
-            if (sectionColumn < 0 || nameColumn < 0 || contributionColumn < 0)
-            {
-                throw new FormatException("The header row must include Section, Name, and Contribution.");
-            }
-
             var output = new StringBuilder();
-            var currentSection = string.Empty;
-            var previousSection = string.Empty;
+            var sections = new List<string>();
 
-            for (var rowIndex = 1; rowIndex < rows.Count; rowIndex++)
+            foreach (var credit in BundledCredits)
             {
-                var row = rows[rowIndex];
-                var name = GetCell(row, nameColumn).Trim();
-                if (name.Length == 0)
+                if (!sections.Contains(credit.Section))
                 {
-                    continue;
+                    sections.Add(credit.Section);
                 }
-
-                var section = GetCell(row, sectionColumn).Trim();
-                if (section.Length == 0)
-                {
-                    section = previousSection.Length > 0 ? previousSection : "Credits";
-                }
-
-                if (!string.Equals(section, currentSection, StringComparison.Ordinal))
-                {
-                    if (output.Length > 0)
-                    {
-                        output.AppendLine();
-                    }
-
-                    output.Append("<b>")
-                        .Append(EscapeRichText(section))
-                        .AppendLine("</b>");
-                    currentSection = section;
-                }
-
-                previousSection = section;
-                output.Append("• ")
-                    .Append(EscapeRichText(name));
-
-                var contribution = GetCell(row, contributionColumn).Trim();
-                if (contribution.Length > 0)
-                {
-                    output.Append(" — ").Append(EscapeRichText(contribution));
-                }
-
-                var link = linkColumn >= 0 ? GetCell(row, linkColumn).Trim() : string.Empty;
-                if (TryGetWebUri(link, out var linkUri))
-                {
-                    var linkLabel = linkTextColumn >= 0 ? GetCell(row, linkTextColumn).Trim() : string.Empty;
-                    if (linkLabel.Length == 0)
-                    {
-                        linkLabel = linkUri.Host.StartsWith("www.", StringComparison.OrdinalIgnoreCase)
-                            ? linkUri.Host.Substring(4)
-                            : linkUri.Host;
-                    }
-
-                    var linkIndex = linkTargets.Count;
-                    linkTargets.Add(linkUri.AbsoluteUri);
-                    output.Append("\n  <link=\"")
-                        .Append(linkIndex.ToString(CultureInfo.InvariantCulture))
-                        .Append("\"><u>")
-                        .Append(EscapeRichText(linkLabel))
-                        .Append("</u></link>");
-                }
-
-                output.AppendLine();
             }
 
-            return output.Length > 0 ? output.ToString().TrimEnd() : "No credits are listed in the sheet yet.";
+            foreach (var section in sections)
+            {
+                if (output.Length > 0)
+                {
+                    output.AppendLine();
+                }
+
+                output.Append("<b>")
+                    .Append(EscapeRichText(section))
+                    .AppendLine("</b>");
+
+                foreach (var credit in BundledCredits)
+                {
+                    if (!string.Equals(credit.Section, section, StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    output.Append("• ")
+                        .Append(EscapeRichText(credit.Name));
+
+                    if (!string.IsNullOrWhiteSpace(credit.Contribution))
+                    {
+                        output.Append(" — ").Append(EscapeRichText(credit.Contribution));
+                    }
+
+                    if (TryGetWebUri(credit.Link, out var linkUri))
+                    {
+                        var linkIndex = linkTargets.Count;
+                        linkTargets.Add(linkUri.AbsoluteUri);
+                        output.Append("\n  <link=\"")
+                            .Append(linkIndex.ToString(CultureInfo.InvariantCulture))
+                            .Append("\"><u>")
+                            .Append(EscapeRichText(GetLinkLabel(linkUri)))
+                            .Append("</u></link>");
+                    }
+
+                    output.AppendLine();
+                }
+            }
+
+            return output.ToString().TrimEnd();
+        }
+
+        private static string GetLinkLabel(Uri uri)
+        {
+            return uri.Host.StartsWith("www.", StringComparison.OrdinalIgnoreCase)
+                ? uri.Host.Substring(4)
+                : uri.Host;
         }
 
         private static bool TryGetWebUri(string value, out Uri uri)
         {
-            return Uri.TryCreate(value, UriKind.Absolute, out uri) &&
+            var normalizedValue = value.Contains("://") ? value : "https://" + value;
+            return Uri.TryCreate(normalizedValue, UriKind.Absolute, out uri) &&
                    (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
-        }
-
-        private static int FindColumn(List<string> header, string columnName)
-        {
-            for (var index = 0; index < header.Count; index++)
-            {
-                var value = header[index].Trim().TrimStart('\uFEFF');
-                if (string.Equals(value, columnName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return index;
-                }
-            }
-
-            return -1;
-        }
-
-        private static string GetCell(List<string> row, int columnIndex)
-        {
-            return columnIndex >= 0 && columnIndex < row.Count ? row[columnIndex] : string.Empty;
         }
 
         private static string EscapeRichText(string value)
@@ -318,79 +271,12 @@ namespace MainMenu
                 .Replace(">", "＞");
         }
 
-        private static List<List<string>> ParseCsv(string csv)
-        {
-            var rows = new List<List<string>>();
-            var row = new List<string>();
-            var field = new StringBuilder();
-            var insideQuotes = false;
 
-            for (var index = 0; index < csv.Length; index++)
-            {
-                var character = csv[index];
 
-                if (insideQuotes)
-                {
-                    if (character == '"' && index + 1 < csv.Length && csv[index + 1] == '"')
-                    {
-                        field.Append('"');
-                        index++;
-                    }
-                    else if (character == '"')
-                    {
-                        insideQuotes = false;
-                    }
-                    else
-                    {
-                        field.Append(character);
-                    }
 
-                    continue;
-                }
 
-                if (character == '"' && field.Length == 0)
-                {
-                    insideQuotes = true;
-                }
-                else if (character == ',')
-                {
-                    row.Add(field.ToString());
-                    field.Clear();
-                }
-                else if (character == '\r' || character == '\n')
-                {
-                    row.Add(field.ToString());
-                    field.Clear();
-                    if (row.Exists(value => value.Length > 0))
-                    {
-                        rows.Add(row);
-                    }
 
-                    row = new List<string>();
-                    if (character == '\r' && index + 1 < csv.Length && csv[index + 1] == '\n')
-                    {
-                        index++;
-                    }
-                }
-                else
-                {
-                    field.Append(character);
-                }
-            }
 
-            if (insideQuotes)
-            {
-                throw new FormatException("A quoted CSV value wasn't closed.");
-            }
-
-            if (field.Length > 0 || row.Count > 0)
-            {
-                row.Add(field.ToString());
-                rows.Add(row);
-            }
-
-            return rows;
-        }
 
         public void QuitClicked()
         {

@@ -301,10 +301,17 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  attackReadDistance: 0
   attackCooldown: 0.5
   moveSpeed: 7.5
   jumpForce: 10
-  FootstepFeedback: {fileID: 0}
+  carryingAttachmentPoint: {fileID: 0}
+  rightHandRig: {fileID: 0}
+  trigger: {fileID: 0}
+  dieAudio: {fileID: 0}
+  getHitAudio: {fileID: 0}
+  hitAudio: {fileID: 0}
+  deliverAudio: {fileID: 0}
 --- !u!135 &3643096347093038878
 SphereCollider:
   m_ObjectHideFlags: 0

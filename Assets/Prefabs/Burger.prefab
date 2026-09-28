@@ -134,6 +134,7 @@ MonoBehaviour:
     gameObject: {fileID: 8041938826496116491}
   - part: 2
     gameObject: {fileID: 3304345655493743071}
+  debugFinishedBurger: 0
 --- !u!1001 &6148666801824728591
 PrefabInstance:
   m_ObjectHideFlags: 0
