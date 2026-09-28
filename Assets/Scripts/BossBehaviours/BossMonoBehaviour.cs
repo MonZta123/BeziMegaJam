@@ -88,6 +88,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
         if (_currentHealth <= 0)
         {
             
+            OnDeath();
             StartCoroutine(DeathTimer());
             Player.Instance.GoBackToKitchen(gameObject);
         }
@@ -108,7 +109,6 @@ public abstract class BossMonoBehaviour : MonoBehaviour
     {
         DeathEffects();
         yield return new WaitForSeconds(2f);
-        OnDeath();
     }
 
     public IEnumerator FlashDamage(float duration)

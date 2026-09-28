@@ -1,15 +1,12 @@
-using System.Diagnostics;
 using UnityEngine;
-
 
 public class GameSceneBootstrapper : MonoBehaviour
 {
-    
     private Player player;
 
     [SerializeField]
     private GameObject splashScreen;
-    
+
     private void Start()
     {
         var instance = InputDeviceManager.Instance;
@@ -30,7 +27,7 @@ public class GameSceneBootstrapper : MonoBehaviour
             new GameObject("Settings").AddComponent<Settings>();
         }
     }
-    
+
     private void OnPlayerJoined()
     {
         UnityEngine.Debug.Log(player);

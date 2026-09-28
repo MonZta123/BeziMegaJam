@@ -8,7 +8,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UI;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 [SelectionBase]
@@ -228,6 +227,7 @@ public class Player : MonoBehaviour
                 // Deliver Burger
                 OrderSystem.Instance.DeliverBurger(_carryingBurger);
                 deliverAudio.Play();
+                _deliveryInView.Deliver();
                 _deliveryInView.HideTooltip();
                 _deliveryInView = null;
             }
