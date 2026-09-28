@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CartoonFX;
 using Gameplay;
 using Gameplay.ReferenceScripts;
 using UI;
@@ -27,6 +28,12 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     [SerializeField]
     public AudioSource shootSound;
+    [SerializeField]
+    public AudioSource hitSound;
+
+    [SerializeField]
+    private GameObject splosion;
+
 
     public bool IsDead { get; private set; }
 
@@ -80,12 +87,28 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            deathSound.Play();
-            OnDeath();
+            
+            StartCoroutine(DeathTimer());
             Player.Instance.GoBackToKitchen(gameObject);
         }
 
         StartCoroutine(FlashDamage(0.2f));
+    }
+
+    private void DeathEffects()
+    {
+        // Implement any death effects here, such as particle effects or animations
+        deathSound.Play();
+        print("jsjsjs");
+        Instantiate(splosion, gameObject.transform.position, Quaternion.identity);
+
+    }
+
+    private IEnumerator DeathTimer()
+    {
+        DeathEffects();
+        yield return new WaitForSeconds(2f);
+        OnDeath();
     }
 
     public IEnumerator FlashDamage(float duration)
