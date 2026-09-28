@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +10,8 @@ public class HealthSystem : MonoBehaviour
 
     [SerializeField]
     private Image healthImage;
+    [SerializeField]
+    private Image bosshealthImage;
 
     [SerializeField]
     private int startHealth = 5;
@@ -140,7 +142,7 @@ public class HealthSystem : MonoBehaviour
         Debug.Log("Wird gecalled");
         for (var i = 0; i < _currentBossHealth; i++)
         {
-            var obj = Instantiate(healthImage, fullBossContainer.transform);
+            var obj = Instantiate(bosshealthImage, fullBossContainer.transform);
             _healthObjectsBoss.Push(obj);
         }
     }
