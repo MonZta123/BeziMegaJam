@@ -21,6 +21,8 @@ namespace MainMenu
 
         [SerializeField]
         private GameObject creditsPanel;
+        [SerializeField]
+        private GameObject instPanel;
 
         private static readonly CreditEntry[] BundledCredits =
         {
@@ -67,6 +69,8 @@ namespace MainMenu
 
         [SerializeField]
         private GameObject confirmQuitPanel;
+        [SerializeField]
+        private GameObject closeInstructionsPanel;
 
         [SerializeField]
         private GameObject splashScreen;
@@ -132,6 +136,19 @@ namespace MainMenu
         public void StartGameClicked()
         {
             SceneManager.LoadScene("GameScene");
+        }
+        public void InstructionsClicked()
+        {
+            PlayAudioButton();
+            blocker.SetActive(true);
+            instPanel.SetActive(true);
+        }
+
+        public void CloseInstructionsClicked()
+        {
+            PlayAudioButton();
+            blocker.SetActive(false);
+            instPanel.SetActive(false);
         }
 
         public void SettingsClicked()

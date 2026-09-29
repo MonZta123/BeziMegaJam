@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ac289d6a05445aba0ab2af61078c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBehaviours.BottomBunBoss.BottomBunBoss
-  health: 3
+  health: 5
   meshRenderer: {fileID: 8082814537921548842}
   flashMaterial: {fileID: 2100000, guid: 5d62557e6d825fb439aa29082a2c6a82, type: 2}
   reward: 2

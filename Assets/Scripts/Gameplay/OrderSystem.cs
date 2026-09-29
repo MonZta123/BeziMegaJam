@@ -156,13 +156,18 @@ namespace Gameplay
             HasLost = true;
             
             Player.Instance.LockControls(true);
-            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             EndScreenManager.Instance.ShowLoseScreen();
         }
 
         private void Win()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             EndScreenManager.Instance.ShowWinScreen(_totalTimeInSeconds);
+
         }
 
         public List<BurgerPart> GetIngredients()
