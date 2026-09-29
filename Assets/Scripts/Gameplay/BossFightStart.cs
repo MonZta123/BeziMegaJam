@@ -90,10 +90,11 @@ public class BossFightStart : MonoBehaviour
         callee.MoveTo(teleportTarget.position);
         callee.SetCheckpoint(teleportTarget.position);
         Instantiate(boss, bossPosition.transform.position, bossPosition.transform.rotation);
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(0.5f);
+
+        HUD.Instance.FadeIn(.5f);
         callee.LockControls(false);
-        HUD.Instance.FadeIn(0.5f);
 
         isActive = false;
         var particles = GetComponentsInChildren<ParticleSystem>();

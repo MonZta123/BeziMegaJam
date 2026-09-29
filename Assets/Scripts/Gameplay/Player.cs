@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
         Instance = this;
 
         _startPosition = transform.position;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     [Header("Components")]

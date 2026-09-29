@@ -51,6 +51,8 @@ public class PauseMenuManager : MonoBehaviour
         blocker.SetActive(true);
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     private void PlayAudioButton()
     {
@@ -63,6 +65,8 @@ public class PauseMenuManager : MonoBehaviour
         blocker.SetActive(false);
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void SettingsClicked()

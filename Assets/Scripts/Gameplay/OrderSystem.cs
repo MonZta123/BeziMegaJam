@@ -30,6 +30,8 @@ namespace Gameplay
         
         [SerializeField]
         private TextMeshPro ordersLeft;
+        [SerializeField]
+        private AudioSource deliveryAudio;
 
         [SerializeField]
         private List<BossFightStart> bossFightStarts;
@@ -76,7 +78,8 @@ namespace Gameplay
 
         public void DeliverBurger(Burger burger)
         {
-            burger.GetComponent<AudioSource>().Play();
+            print(burger);
+            deliveryAudio.Play();
             Destroy(burger.gameObject);
             var originalPosition = burger.GetOriginalPosition();
             Instantiate(burgerPrefab, originalPosition.Item1, originalPosition.Item2);

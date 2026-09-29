@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBehaviours.PattyBoss.PickleCannonScript
   pickle: {fileID: 6535205684168288185, guid: 22f0537fb86428a40a855c1a127736f4, type: 3}
-  shootCooldown: 2.5
+  shootCooldown: 3
 --- !u!1001 &5175378782824975563
 PrefabInstance:
   m_ObjectHideFlags: 0

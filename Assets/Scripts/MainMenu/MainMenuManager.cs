@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -25,7 +25,7 @@ namespace MainMenu
         private static readonly CreditEntry[] BundledCredits =
         {
             new CreditEntry("Design", "Jesse", "Design/Production/Asset Research", "https://jessemauritz1.wixsite.com/website"),
-            new CreditEntry("Art", "Cris", "Enviornment/Prop Artist", "https://crisrvs.artstation.com/"),
+            new CreditEntry("Art", "Cris", "Environment/Prop Artist", "https://crisrvs.artstation.com/"),
             new CreditEntry("Developer", "TJ", "Coding/Mechanics", "tj-codez.itch.io"),
             new CreditEntry("Art", "GraphicSauce", "UI Font", "https://www.1001fonts.com/sketch-chalk-font.html"),
             new CreditEntry("Art", "Stylized Core By Z", "Character", "https://assetstore.unity.com/packages/3d/characters/humanoids/stylized-player-character-free-371506"),
