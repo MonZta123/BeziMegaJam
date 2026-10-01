@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +35,33 @@ public class HealthSystem : MonoBehaviour
 
     private int _maxHealth;
     private int _currentHealth;
+
+    /// <summary>Sets the player's current and maximum health and rebuilds its UI indicators.</summary>
+    public void SetPlayerHealth(int value)
+    {
+        _maxHealth = value;
+        _currentHealth = value;
+
+        ClearChildren(backgroundHealthContainer.transform);
+        ClearHealthObjects();
+
+        BuildBackgroundPlayer();
+        BuildHealthPlayer();
+    }
+
+    private static void ClearChildren(Transform parent)
+    {
+        for (var childIndex = parent.childCount - 1; childIndex >= 0; childIndex--)
+            Destroy(parent.GetChild(childIndex).gameObject);
+    }
+
+    private void ClearHealthObjects()
+    {
+        foreach (var healthObject in _healthObjects)
+            Destroy(healthObject.gameObject);
+
+        _healthObjects.Clear();
+    }
 
     public void SetMaxHealthPlayer(int value)
     {

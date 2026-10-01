@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -23,6 +23,8 @@ namespace MainMenu
         private GameObject creditsPanel;
         [SerializeField]
         private GameObject instPanel;
+
+
 
         private static readonly CreditEntry[] BundledCredits =
         {
@@ -137,6 +139,94 @@ namespace MainMenu
         {
             SceneManager.LoadScene("GameScene");
         }
+
+        /// <summary>Opens the difficulty settings panel and loads the saved values.</summary>
+        public void DifficultyClicked()
+        {
+            PlayAudioButton();
+            var panel = GetDifficultyPanel();
+            panel.SetActive(true);
+            PopulateDifficultyFields();
+            blocker.SetActive(true);
+        }
+
+        /// <summary>Validates and saves the difficulty settings entered in the panel.</summary>
+        public void ConfirmDifficultyClicked()
+        {
+            if (!TryReadDifficultyValue("PlayerHealthInput", out var playerHealth) ||
+                !TryReadDifficultyValue("TopBunHealthInput", out var topBunHealth) ||
+                !TryReadDifficultyValue("PattyHealthInput", out var pattyHealth) ||
+                !TryReadDifficultyValue("BottomBunHealthInput", out var bottomBunHealth) ||
+                !TryReadDifficultyValue("OrdersToWinInput", out var ordersToWin) ||
+                !TryReadDifficultyValue("OrderTimerInput", out var orderTimer) ||
+                !TryReadDifficultyValue("OrdersToLoseInput", out var ordersToLose))
+            {
+                GetDifficultyErrorText().text = "Health and order values must be 1-999; the timer must be 1-3600 seconds.";
+                return;
+            }
+
+            DifficultyOptions.Save(
+                playerHealth,
+                topBunHealth,
+                pattyHealth,
+                bottomBunHealth,
+                ordersToWin,
+                orderTimer,
+                ordersToLose);
+
+            PlayAudioButton();
+            GetDifficultyPanel().SetActive(false);
+            blocker.SetActive(false);
+        }
+
+        /// <summary>Closes the difficulty panel without changing saved values.</summary>
+        public void CancelDifficultyClicked()
+        {
+            PlayAudioButton();
+            GetDifficultyPanel().SetActive(false);
+            blocker.SetActive(false);
+        }
+
+        private void PopulateDifficultyFields()
+        {
+            GetDifficultyInput("PlayerHealthInput").text = DifficultyOptions.PlayerHealth.ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("TopBunHealthInput").text = DifficultyOptions.GetBossHealth(
+                DifficultyOptions.TopBunBossId, DifficultyOptions.DefaultTopBunBossHealth).ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("PattyHealthInput").text = DifficultyOptions.GetBossHealth(
+                DifficultyOptions.PattyBossId, DifficultyOptions.DefaultPattyBossHealth).ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("BottomBunHealthInput").text = DifficultyOptions.GetBossHealth(
+                DifficultyOptions.BottomBunBossId, DifficultyOptions.DefaultBottomBunBossHealth).ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("OrdersToWinInput").text = DifficultyOptions.OrdersToWin.ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("OrderTimerInput").text = DifficultyOptions.OrderTimerSeconds.ToString(CultureInfo.InvariantCulture);
+            GetDifficultyInput("OrdersToLoseInput").text = DifficultyOptions.OrdersToLose.ToString(CultureInfo.InvariantCulture);
+            GetDifficultyErrorText().text = string.Empty;
+        }
+
+        private bool TryReadDifficultyValue(string inputName, out int value)
+        {
+            var maximum = inputName == "OrderTimerInput" ? 3600 : 999;
+            return int.TryParse(
+                GetDifficultyInput(inputName).text,
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out value) && value > 0 && value <= maximum;
+        }
+
+        private GameObject GetDifficultyPanel()
+        {
+            return mainMenuPanel.transform.parent.Find("DifficultyPanel").gameObject;
+        }
+
+        private TMP_InputField GetDifficultyInput(string inputName)
+        {
+            return GetDifficultyPanel().transform.Find(inputName).GetComponent<TMP_InputField>();
+        }
+
+        private TMP_Text GetDifficultyErrorText()
+        {
+            return GetDifficultyPanel().transform.Find("DifficultyErrorText").GetComponent<TMP_Text>();
+        }
+
         public void InstructionsClicked()
         {
             PlayAudioButton();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using BossBehaviours;
 using BossBehaviours.BottomBunBoss;
@@ -52,16 +52,16 @@ public class Player : MonoBehaviour
 
     [Header("Balancing")]
     [SerializeField]
-    private float attackReadDistance;
-
-    [SerializeField]
     private float attackCooldown = 0.5f;
 
     [SerializeField]
     private float moveSpeed = 7.5f;
 
     [SerializeField]
-    private float jumpForce = 10.0f;
+    private float moveAcceleration = 40f;
+
+    [SerializeField]
+    private float moveDeceleration = 50f;
 
     [SerializeField]
     public Transform carryingAttachmentPoint;
@@ -107,7 +107,6 @@ public class Player : MonoBehaviour
 
         _playerInput.actions["attack"].performed += OnAttack;
         _playerInput.actions["interact"].performed += OnInteract;
-        _playerInput.actions["jump"].performed += OnJumping;
         _playerInput.actions["pause"].performed += OnPause;
     }
 
@@ -118,7 +117,6 @@ public class Player : MonoBehaviour
 
         _playerInput.actions["attack"].performed -= OnAttack;
         _playerInput.actions["interact"].performed -= OnInteract;
-        _playerInput.actions["jump"].performed -= OnJumping;
         _playerInput.actions["pause"].performed -= OnPause;
     }
 
@@ -136,7 +134,7 @@ public class Player : MonoBehaviour
     {
         _health = value;
         _maxHealth = value;
-        HealthSystem.Instance.SetCurrentHealthPlayer(value);
+        HealthSystem.Instance.SetPlayerHealth(value);
     }
 
     public void TakeDamage(int value)
@@ -194,21 +192,13 @@ public class Player : MonoBehaviour
     }
 
     private bool _attack;
-    private bool _jump;
-
-    private float _debugMove;
-
     private float _timeLastAttack;
     private PauseMenuManager _pauseMenuManager;
+    private Vector2 _moveInput;
 
     private void OnAttack(InputAction.CallbackContext ctx)
     {
         _attack = true;
-    }
-
-    private void OnJumping(InputAction.CallbackContext ctx)
-    {
-        // _jump = true;
     }
 
     private bool _controlsLocked;
@@ -216,6 +206,22 @@ public class Player : MonoBehaviour
     public void LockControls(bool locked)
     {
         _controlsLocked = locked;
+        if (!locked)
+            return;
+
+        _moveInput = Vector2.zero;
+        StopHorizontalMovement();
+    }
+
+    private void StopHorizontalMovement()
+    {
+        if (!rb)
+            return;
+
+        var velocity = rb.linearVelocity;
+        velocity.x = 0f;
+        velocity.z = 0f;
+        rb.linearVelocity = velocity;
     }
 
     private Burger _carryingBurger;
@@ -263,6 +269,33 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         CheckIsGrounded();
+
+        if (_controlsLocked)
+        {
+            StopHorizontalMovement();
+            return;
+        }
+
+        if (!_playerInput || _pauseMenuManager.PauseIsActive)
+            return;
+
+        var currentVelocity = rb.linearVelocity;
+        var currentHorizontalVelocity = new Vector3(currentVelocity.x, 0f, currentVelocity.z);
+        var targetHorizontalVelocity = new Vector3(
+            _moveInput.x * moveSpeed,
+            0f,
+            _moveInput.y * moveSpeed);
+        var acceleration = _moveInput.sqrMagnitude > 0f ? moveAcceleration : moveDeceleration;
+
+        currentHorizontalVelocity = Vector3.MoveTowards(
+            currentHorizontalVelocity,
+            targetHorizontalVelocity,
+            acceleration * Time.fixedDeltaTime);
+
+        rb.linearVelocity = new Vector3(
+            currentHorizontalVelocity.x,
+            currentVelocity.y,
+            currentHorizontalVelocity.z);
     }
 
     private void Start()
@@ -270,7 +303,7 @@ public class Player : MonoBehaviour
         _pauseMenuManager = PauseMenuManager.Instance;
         CheckIsGrounded();
         animator.SetBool(s_isGrounded, IsGrounded);
-        SetHealth(5);
+        SetHealth(DifficultyOptions.PlayerHealth);
     }
 
 #if UNITY_EDITOR
@@ -289,6 +322,7 @@ public class Player : MonoBehaviour
             return;
 
         var move = Vector2.ClampMagnitude(_playerInput.actions["Move"].ReadValue<Vector2>(), 1);
+        _moveInput = _controlsLocked ? Vector2.zero : move;
 
         if (!_controlsLocked)
         {
@@ -299,7 +333,6 @@ public class Player : MonoBehaviour
                     _timeLastAttack = Time.timeSinceLevelLoad;
                     animator.SetTrigger(s_attack);
 
-                    // if (Physics.SphereCast(transform.position + Vector3.up * 1.5f, 1.5f,  out var hitInfo, attackMask ))
 
                     var size = Physics.OverlapSphereNonAlloc(
                         transform.position + Vector3.up * 1.302f + transform.forward * 0.5f, 0.5f, _results,
@@ -328,29 +361,9 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (_jump)
-            {
-                if (IsGrounded && _hasLostGround && !_jumping)
-                {
-                    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                    _jumping = true;
-                }
-
-                if (!IsGrounded && !_hasLostGround)
-                {
-                    _hasLostGround = true;
-                }
-
-                if (IsGrounded && _jumping && _hasLostGround)
-                {
-                    _jumping = false;
-                }
-            }
 
             if (move != Vector2.zero)
                 transform.LookAt(transform.position + new Vector3(move.x, 0, move.y), Vector3.up);
-
-            rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.y * moveSpeed);
 
             if (animator)
             {
@@ -359,14 +372,12 @@ public class Player : MonoBehaviour
             }
         }
 
-        _debugMove = move.magnitude;
 
         _attack = false;
-        _jump = false;
+
     }
 
-    private bool _jumping;
-    private bool _hasLostGround = true;
+
 
     private void OnDrawGizmosSelected()
     {
@@ -469,11 +480,5 @@ public class Player : MonoBehaviour
         rb.MovePosition(teleportTargetPosition);
     }
 
-    public void SetModeCarrying()
-    {
-    }
 
-    public void SetModeNotCarrying()
-    {
-    }
 }

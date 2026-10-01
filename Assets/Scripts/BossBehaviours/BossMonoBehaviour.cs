@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using CartoonFX;
 using Gameplay;
@@ -52,6 +52,7 @@ public abstract class BossMonoBehaviour : MonoBehaviour
 
     protected virtual void Awake()
     {
+        health = DifficultyOptions.GetBossHealth(GetType().Name, health);
         HealthSystem.Instance.ShowBossHealth(health, health);
 
         _materials = meshRenderer.sharedMaterials;

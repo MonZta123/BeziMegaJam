@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UI;
 using UnityEngine;
 using MoreMountains.Feedbacks;
@@ -6,8 +6,6 @@ using MoreMountains.Feedbacks;
 
 public class BossFightStart : MonoBehaviour
 {
-    private Player _player;
-
     [SerializeField]
     private Transform teleportTarget;
 
@@ -44,7 +42,6 @@ public class BossFightStart : MonoBehaviour
 
     public void Start()
     {
-        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _ingredient = GetComponentInChildren<IngredientRef>().gameObject;
         _startPos = _ingredient.transform.position;
         Reset();

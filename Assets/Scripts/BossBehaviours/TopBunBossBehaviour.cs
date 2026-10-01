@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,8 +22,6 @@ namespace BossBehaviours
         [SerializeField]
         private KetchupBottleScript projectile;
 
-        [SerializeField]
-        private float moveCooldown;
 
         [SerializeField]
         private float aoeAttackCooldown;
@@ -34,7 +32,6 @@ namespace BossBehaviours
         [SerializeField]
         private Vector3 ketchupShootRange = new(64.14f, 0f, -0.86f);
 
-        private float _moveTimer;
 
         private float _aoeAttackTimer;
 

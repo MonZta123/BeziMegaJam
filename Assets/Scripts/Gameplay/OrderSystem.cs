@@ -1,4 +1,4 @@
-﻿using System;
+
 using System.Collections.Generic;
 using Gameplay.ReferenceScripts;
 using MoreMountains.Feedbacks;
@@ -40,9 +40,9 @@ namespace Gameplay
 
         private float _lastOrderStarted;
 
-        private List<BurgerPart> _currentOrder;
+        private bool _orderIsActive;
 
-        private List<BurgerPart> _collected;
+
 
         private int _timeLeftInSeconds;
 
@@ -65,15 +65,12 @@ namespace Gameplay
         private void Awake()
         {
             Instance = this;
+            timeInSecondsUntilOrderCancelled = DifficultyOptions.OrderTimerSeconds;
+            howManyFailedOrderUntilDead = DifficultyOptions.OrdersToLose;
+            howManyOrdersToWin = DifficultyOptions.OrdersToWin;
             _ordersLeft = howManyOrdersToWin;
 
             InitNewOrder();
-        }
-
-        private List<BurgerPart> BuildNewOrder()
-        {
-            // Todo: Change order maybe?
-            return new List<BurgerPart>() { BurgerPart.TopBun, BurgerPart.Patty, BurgerPart.BottomBun };
         }
 
         public void DeliverBurger(Burger burger)
@@ -130,17 +127,15 @@ namespace Gameplay
                 }
             }
             
-            if (_currentOrder == null)
+            if (!_orderIsActive)
             {
                 _lastOrderStarted = Time.timeSinceLevelLoad;
-
-                _currentOrder = BuildNewOrder();
-                _collected = new List<BurgerPart>();
+                _orderIsActive = true;
             }
 
             if (Time.timeSinceLevelLoad - _lastOrderStarted > timeInSecondsUntilOrderCancelled)
             {
-                _currentOrder = null;
+                _orderIsActive = false;
 
                 _errors++;
 

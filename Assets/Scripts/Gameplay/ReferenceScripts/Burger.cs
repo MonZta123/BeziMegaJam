@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
 using UI;
 using UnityEngine;
 
@@ -24,8 +23,6 @@ namespace Gameplay.ReferenceScripts
         private Vector3 _originalPosition;
         private Quaternion _originalRotation;
 
-        private Player _carrier;
-
         [SerializeField]
         private List<BurgerPartMatch> parts;
 
@@ -33,81 +30,50 @@ namespace Gameplay.ReferenceScripts
         public bool debugFinishedBurger;
 
         public static Burger CurrentBurger { get; private set; }
-        
+
+        private readonly List<BurgerPart> activeParts = new();
+
         public (Vector3, Quaternion) GetOriginalPosition() => (_originalPosition, _originalRotation);
 
         public bool GetIsFinished()
         {
             var ingredients = OrderSystem.Instance.GetIngredients();
+            var isFinished = ingredients.All(ingredient => activeParts.Contains(ingredient));
 
-            var activeGameObjects = activeParts.ToList();
-
-            var isFinished = ingredients.All(n => activeGameObjects.Contains(n));
-
-            if(debugFinishedBurger)
-                isFinished = true;
-
-            return isFinished;
+            return debugFinishedBurger || isFinished;
         }
 
-        public bool GetHasMistakes()
-        {
-            var ingredients = OrderSystem.Instance.GetIngredients();
-
-            var activeGameObjects = activeParts.ToList();
-
-            return activeGameObjects.Any(m => !ingredients.Contains(m));
-        }        
-        
-        public void Awake()
+        private void Awake()
         {
             _originalPosition = transform.position;
             _originalRotation = transform.rotation;
-
             CurrentBurger = this;
-            
-            parts.ForEach(x => x.gameObject.SetActive(false));
+
+            parts.ForEach(part => part.gameObject.SetActive(false));
         }
 
         public void Carry(Player player)
         {
-            _carrier = player;
             transform.SetParent(player.GetAttachmentPoint());
             transform.rotation = Quaternion.identity;
             transform.localPosition = Vector3.zero;
             HideTooltip();
-            player.SetModeCarrying();
         }
 
         public void Drop()
         {
             transform.parent = null;
-            _carrier.SetModeNotCarrying();
-            
             transform.position = _originalPosition;
             transform.rotation = _originalRotation;
-            _carrier = null;
         }
 
-        private List<BurgerPart> activeParts = new();
-
-        public List<BurgerPart> GetList()
-        {
-            return activeParts;
-        }
-
-        public bool HasAnyParts()
-        {
-            return activeParts.Count > 0;
-        }
-        
         public void AddBurgerPart(BurgerPart part)
         {
-            var partObj = parts.Find(x => x.part == part);
-            if (partObj == null || !partObj.gameObject)
+            var partMatch = parts.Find(candidate => candidate.part == part);
+            if (partMatch == null || !partMatch.gameObject)
                 return;
 
-            partObj.gameObject.SetActive(true);
+            partMatch.gameObject.SetActive(true);
             if (!activeParts.Contains(part))
                 activeParts.Add(part);
         }
