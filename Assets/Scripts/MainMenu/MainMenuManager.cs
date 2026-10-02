@@ -90,38 +90,18 @@ namespace MainMenu
         private Slider sfxVolumeSlider;
 
         [SerializeField]
-        private AudioMixer audioMixer;
+        private Slider mouseSensitivitySlider;
 
         [SerializeField]
-        private bool setSplashScreenActive = true;
+        private AudioMixer audioMixer;
 
         [SerializeField]
         private AudioSource audioSource;
 
         private void Start()
         {
-            if (!InputDeviceManager.Instance.PlayerInput)
-            {
-                if (setSplashScreenActive)
-                {
-                    splashScreen.SetActive(true);
-                }
-
-                InputDeviceManager.Instance.playerJoined.AddListener(OnPlayerJoined);
-            }
-            else
-            {
-                mainMenuPanel.SetActive(true);
-            }
-        }
-
-        private void OnPlayerJoined()
-        {
-            InputDeviceManager.Instance.playerJoined.RemoveListener(OnPlayerJoined);
-            if (setSplashScreenActive)
-            {
+            if (splashScreen)
                 splashScreen.SetActive(false);
-            }
 
             mainMenuPanel.SetActive(true);
         }
@@ -259,6 +239,8 @@ namespace MainMenu
             _masterVolume = masterVolumeSlider.value;
             _musicVolume = musicVolumeSlider.value;
             _sfxVolume = sfxVolumeSlider.value;
+            _mouseSensitivity = Settings.Instance.MouseSensitivity;
+            mouseSensitivitySlider.value = _mouseSensitivity;
         }
 
         public void CreditsClicked()
@@ -419,6 +401,20 @@ namespace MainMenu
         private float _masterVolume;
         private float _musicVolume;
         private float _sfxVolume;
+        private float _mouseSensitivity;
+
+        /// <summary>
+        /// Previews the selected mouse sensitivity until the settings are confirmed.
+        /// </summary>
+        public void SetMouseSensitivity(float sensitivity)
+        {
+            _mouseSensitivity = Mathf.Clamp(
+                sensitivity,
+                Settings.MinimumMouseSensitivity,
+                Settings.MaximumMouseSensitivity);
+            if (Player.Instance)
+                Player.Instance.SetMouseSensitivity(_mouseSensitivity);
+        }
 
         public void SetMasterVolume(float volume)
         {
@@ -447,6 +443,10 @@ namespace MainMenu
             Settings.Instance.MasterVolume = _masterVolume;
             Settings.Instance.MusicVolume = _musicVolume;
             Settings.Instance.SfxVolume = _sfxVolume;
+            Settings.Instance.MouseSensitivity = _mouseSensitivity;
+
+            if (Player.Instance)
+                Player.Instance.SetMouseSensitivity(_mouseSensitivity);
 
             _masterVolume = 0;
             _musicVolume = 0;
@@ -460,6 +460,11 @@ namespace MainMenu
             settingsPanel.SetActive(false);
 
             var instance = Settings.Instance;
+            _mouseSensitivity = instance.MouseSensitivity;
+            if (mouseSensitivitySlider)
+                mouseSensitivitySlider.value = _mouseSensitivity;
+            if (Player.Instance)
+                Player.Instance.SetMouseSensitivity(_mouseSensitivity);
 
             audioMixer.SetFloat("master", Mathf.Log10(Mathf.Max(instance.MasterVolume, 0.0001f)) * 20f);
             audioMixer.SetFloat("music", Mathf.Log10(Mathf.Max(instance.MusicVolume, 0.0001f)) * 20f);

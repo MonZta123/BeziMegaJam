@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 54a8fab4663d64643ac4f6704f323b80
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 13400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 190379
+  packageName: Stylized American Diner Cafe
+  packageVersion: 1.2
+  assetPath: Assets/TirgamesAssets/StylizedWorld/Base/PhysMaterials/PhyMetal.physicMaterial
+  uploadId: 912814

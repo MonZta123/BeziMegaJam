@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bace5f7f19420584badf669a07b58e8d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 190379
+  packageName: Stylized American Diner Cafe
+  packageVersion: 1.2
+  assetPath: Assets/TirgamesAssets/StylizedWorld/Locations/Urban/Scenes/StylizedUrbanProfiles/DinerCafeLighting.lighting
+  uploadId: 912814

@@ -1,4 +1,4 @@
-﻿using UI;
+using UI;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -30,11 +30,15 @@ public class PauseMenuManager : MonoBehaviour
     private Slider sfxVolumeSlider;
 
     [SerializeField]
+    private Slider mouseSensitivitySlider;
+
+    [SerializeField]
     private AudioMixer audioMixer;
     [SerializeField]
     private AudioSource audioSource;
 
-    public bool PauseIsActive => pauseMenuPanel.activeSelf;
+    public bool PauseIsActive =>
+        pauseMenuPanel.activeSelf || settingsPanel.activeSelf || confirmQuitPanel.activeSelf;
 
     private void Awake()
     {
@@ -44,12 +48,14 @@ public class PauseMenuManager : MonoBehaviour
     private float _masterVolume;
     private float _musicVolume;
     private float _sfxVolume;
+    private float _mouseSensitivity;
 
     public void ShowPauseMenu()
     {
         print("openingpausemenu");
         blocker.SetActive(true);
         pauseMenuPanel.SetActive(true);
+        pauseMenuPanel.transform.SetAsLastSibling();
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -64,6 +70,8 @@ public class PauseMenuManager : MonoBehaviour
         PlayAudioButton();
         blocker.SetActive(false);
         pauseMenuPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        confirmQuitPanel.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -74,6 +82,7 @@ public class PauseMenuManager : MonoBehaviour
         PlayAudioButton();
         pauseMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
+        settingsPanel.transform.SetAsLastSibling();
 
         audioMixer.GetFloat("master", out var db);
         masterVolumeSlider.value = Mathf.Pow(10f, db / 20f);
@@ -87,6 +96,23 @@ public class PauseMenuManager : MonoBehaviour
         _masterVolume = masterVolumeSlider.value;
         _musicVolume = musicVolumeSlider.value;
         _sfxVolume = sfxVolumeSlider.value;
+        _mouseSensitivity = Settings.SavedMouseSensitivity;
+        mouseSensitivitySlider.value = _mouseSensitivity;
+        if (Player.Instance)
+            Player.Instance.SetMouseSensitivity(_mouseSensitivity);
+    }
+
+    /// <summary>
+    /// Previews the mouse sensitivity selected in the pause-menu settings.
+    /// </summary>
+    public void SetMouseSensitivity(float sensitivity)
+    {
+        _mouseSensitivity = Mathf.Clamp(
+            sensitivity,
+            Settings.MinimumMouseSensitivity,
+            Settings.MaximumMouseSensitivity);
+        if (Player.Instance)
+            Player.Instance.SetMouseSensitivity(_mouseSensitivity);
     }
 
     public void SetMasterVolume(float volume)
@@ -111,24 +137,35 @@ public class PauseMenuManager : MonoBehaviour
     {
         PlayAudioButton();
         pauseMenuPanel.SetActive(true);
+        pauseMenuPanel.transform.SetAsLastSibling();
         settingsPanel.SetActive(false);
 
         Settings.Instance.MasterVolume = _masterVolume;
         Settings.Instance.MusicVolume = _musicVolume;
         Settings.Instance.SfxVolume = _sfxVolume;
+        Settings.Instance.MouseSensitivity = _mouseSensitivity;
+
+        if (Player.Instance)
+            Player.Instance.SetMouseSensitivity(_mouseSensitivity);
 
         _masterVolume = 0;
         _musicVolume = 0;
         _sfxVolume = 0;
+        _mouseSensitivity = 0f;
     }
 
     public void CancelSettingsClicked()
     {
         PlayAudioButton();
         pauseMenuPanel.SetActive(true);
+        pauseMenuPanel.transform.SetAsLastSibling();
         settingsPanel.SetActive(false);
 
         var instance = Settings.Instance;
+        _mouseSensitivity = instance.MouseSensitivity;
+        mouseSensitivitySlider.value = _mouseSensitivity;
+        if (Player.Instance)
+            Player.Instance.SetMouseSensitivity(_mouseSensitivity);
 
         audioMixer.SetFloat("master", Mathf.Log10(Mathf.Max(instance.MasterVolume, 0.0001f)) * 20f);
         audioMixer.SetFloat("music", Mathf.Log10(Mathf.Max(instance.MusicVolume, 0.0001f)) * 20f);
@@ -144,6 +181,7 @@ public class PauseMenuManager : MonoBehaviour
         PlayAudioButton();
         pauseMenuPanel.SetActive(false);
         confirmQuitPanel.SetActive(true);
+        confirmQuitPanel.transform.SetAsLastSibling();
     }
 
     public void ConfirmQuitClicked()
@@ -157,6 +195,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         PlayAudioButton();
         pauseMenuPanel.SetActive(true);
+        pauseMenuPanel.transform.SetAsLastSibling();
         confirmQuitPanel.SetActive(false);
     }
 }

@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 122180a1cc182d548be7b3db3fd303a3
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: DoorL
+    100002: DoorR
+    100004: Frame
+    100006: GlassL
+    100008: GlassR
+    100010: //RootNode
+    100012: UCX_DoorL_01
+    100014: UCX_DoorL_02
+    100016: UCX_DoorL_03
+    100018: UCX_DoorL_04
+    100020: UCX_DoorL_05
+    100022: UCX_DoorR_01
+    100024: UCX_DoorR_02
+    100026: UCX_DoorR_03
+    100028: UCX_DoorR_04
+    100030: UCX_DoorR_05
+    100032: UCX_Frame_01
+    100034: UCX_Frame_02
+    100036: UCX_Frame_03
+    100038: UCX_GlassL_01
+    100040: UCX_GlassR_01
+    400000: DoorL
+    400002: DoorR
+    400004: Frame
+    400006: GlassL
+    400008: GlassR
+    400010: //RootNode
+    400012: UCX_DoorL_01
+    400014: UCX_DoorL_02
+    400016: UCX_DoorL_03
+    400018: UCX_DoorL_04
+    400020: UCX_DoorL_05
+    400022: UCX_DoorR_01
+    400024: UCX_DoorR_02
+    400026: UCX_DoorR_03
+    400028: UCX_DoorR_04
+    400030: UCX_DoorR_05
+    400032: UCX_Frame_01
+    400034: UCX_Frame_02
+    400036: UCX_Frame_03
+    400038: UCX_GlassL_01
+    400040: UCX_GlassR_01
+    2300000: DoorL
+    2300002: DoorR
+    2300004: Frame
+    2300006: GlassL
+    2300008: GlassR
+    2300010: UCX_DoorL_01
+    2300012: UCX_DoorL_02
+    2300014: UCX_DoorL_03
+    2300016: UCX_DoorL_04
+    2300018: UCX_DoorL_05
+    2300020: UCX_DoorR_01
+    2300022: UCX_DoorR_02
+    2300024: UCX_DoorR_03
+    2300026: UCX_DoorR_04
+    2300028: UCX_DoorR_05
+    2300030: UCX_Frame_01
+    2300032: UCX_Frame_02
+    2300034: UCX_Frame_03
+    2300036: UCX_GlassL_01
+    2300038: UCX_GlassR_01
+    3300000: DoorL
+    3300002: DoorR
+    3300004: Frame
+    3300006: GlassL
+    3300008: GlassR
+    3300010: UCX_DoorL_01
+    3300012: UCX_DoorL_02
+    3300014: UCX_DoorL_03
+    3300016: UCX_DoorL_04
+    3300018: UCX_DoorL_05
+    3300020: UCX_DoorR_01
+    3300022: UCX_DoorR_02
+    3300024: UCX_DoorR_03
+    3300026: UCX_DoorR_04
+    3300028: UCX_DoorR_05
+    3300030: UCX_Frame_01
+    3300032: UCX_Frame_02
+    3300034: UCX_Frame_03
+    3300036: UCX_GlassL_01
+    3300038: UCX_GlassR_01
+    4300000: Frame
+    4300002: UCX_Frame_01
+    4300004: UCX_Frame_02
+    4300006: UCX_Frame_03
+    4300008: DoorR
+    4300010: GlassR
+    4300012: UCX_GlassR_01
+    4300014: UCX_DoorR_01
+    4300016: UCX_DoorR_02
+    4300018: UCX_DoorR_03
+    4300020: UCX_DoorR_04
+    4300022: UCX_DoorR_05
+    4300024: DoorL
+    4300026: GlassL
+    4300028: UCX_GlassL_01
+    4300030: UCX_DoorL_01
+    4300032: UCX_DoorL_02
+    4300034: UCX_DoorL_03
+    4300036: UCX_DoorL_04
+    4300038: UCX_DoorL_05
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Phy
+    second: {fileID: 2100000, guid: f620cc6e058e97a408f2bb879da59d1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PropDoor02SkinA
+    second: {fileID: 2100000, guid: 9a7e7a53e9e20fe4aabf9fc1739a1f9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PropGlass
+    second: {fileID: 2100000, guid: 348c2fa936023ed4fb37076df6028629, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 190379
+  packageName: Stylized American Diner Cafe
+  packageVersion: 1.2
+  assetPath: Assets/TirgamesAssets/StylizedWorld/Architecture/Models/PropDoor02TypeB.FBX
+  uploadId: 912814
